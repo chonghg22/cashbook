@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Colorlib Templates">
+<meta name="author" content="Colorlib">
+<meta name="keywords" content="Colorlib Templates">
+<title>InsertForm</title>
+<link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+<link href="/css/registerForm.css" rel="stylesheet" media="all">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+// 버튼을 클릭했을때 공란이 있거나 4자 이하면 모든칸은 초기화 된다.
+/*
+let helperInit = function(){
+	$('#idHelper').text("");
+	$('#pwHelper').text("");
+	$('#nameHelper').text("");
+	$('#phoneHelper').text("");
+	$('#addressHelper').text("");
+	$('#emailHelper').text("");
+};
+*/
+//document(body)가 준비되면 작동된다.
+$(document).ready(function(){
+//<button>을 클릭하면 작동된다.
+	$('#btn').click(function(){
+		// id값이 myform인 메소드에서 action 주소로 보낸다.
+		$('#myform').submit();
+	/*
+	
+	if($('#memberId').val()length < 4) {
+		helperInit();
+		$('#idHelper').text("id 4자이상");
+		$('#memberId').focus();
+	} else if ($('#memberPw').val().length<4){
+		helperInit();	
+		$('#pwHelper').text("PW는 4자이상");
+		$('#memberPw').focus();
+		
+	}else if ($('#memberPw').val() != $('#memberPw2').val()){
+		helperInit();
+		$('#pwHelper').text("Pw를 확인하세요");
+		$('#memberPw').focus();
+	}else if ($('#memberName').val().length ===0 ){
+		helperInit();
+		$('#nameHelper').text("입력하세요");
+		$('#memberName').focus();
+	}else if ($('#memberPhone').val().length ===0 ){
+		helperInit();
+		$('#phoneHelper').text("입력하세요");
+		$('#memberPhone').focus();
+	}else if ($('#memberAddress').val().length ===0 ){
+		helperInit();
+		$('#addressHelper').text("입력하세요");
+		$('#memberAddress').focus();
+	}else if ($('#memberEmail').val().length ===0 ){
+		helperInit();
+		$('#emailHelper').text("입력하세요");
+		$('#memberEmail').focus();
+	}else {
+		$('#myform').submit();
+	}
+	*/
+	});
+	
+	
+});
+
+</script>
+<body>
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+		<div class="wrapper wrapper--w790">
+			<div class="card card-5">
+				<div class="card-heading">
+					<h2 class="title">Insert Member</h2>
+				</div>
+				<div class="card-body">
+					<form method = "post" action="/addMember" id="myform">						
+						<div class="form-row">
+							<div class="name">
+							아이디
+							</div>
+							<div class="value">
+								<div class="input-group">
+									<input class="input--style-5" type="text" name="memberId" id="memberId">
+									<span id = "idHelper"></span>
+								</div>
+							</div>
+						</div>						
+						<div class="form-row">
+							<div class="name">
+							비밀번호
+							</div>
+								<div class="value">
+								<div class="input-group">
+									<input class="input--style-5" type="password" name="memberPw" id = "memberPw">
+									<span id = "pwHelper"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="name">
+							비밀번호 확인
+							</div>
+								<div class="value">
+								<div class="input-group">
+									<input class="input--style-5" type="password"  id = "memberPw2">
+								</div>
+							</div>
+						</div>							
+						<div class="form-row">
+							<div class="name">
+							사용자이름
+							</div>
+								<div class="value">
+								<div class="input-group">
+									<input class="input--style-5" type="text" name="memberName" id = "memberName">
+									<span id = "nameHelper"></span>
+								</div>
+							</div>
+						</div>						
+						<div class="form-row">
+							<div class="name">
+							전화번호
+							</div>
+								<div class="value">
+								<div class="input-group">
+									<input class="input--style-5" type="text" name="memberPhone" id = "memberPhone">
+									<span id = "phoneHelper"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="name">
+							주소
+							</div>
+								<div class="value">
+								<div class="input-group">
+									<input class="input--style-5" type="text" name="memberAddress" id = "memberAddress">
+									<span id = "memberAddress"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="name">
+							이메일
+							</div>
+								<div class="value">
+								<div class="input-group">
+									<input class="input--style-5" type="text" name="memberEmail" id = "memberEmail">
+									<span id = "emailHelper"></span>
+								</div>
+							</div>
+						</div>
+						<div>
+							<button class="btn btn--radius-2 btn--blue" type="button" id="btn">추가</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="vendor/jquery/jquery.min.js" type="4a061543b3ab991da7fc1126-text/javascript"></script>
+	<script src="vendor/select2/select2.min.js" type="4a061543b3ab991da7fc1126-text/javascript"></script>
+	<script src="vendor/datepicker/moment.min.js" type="4a061543b3ab991da7fc1126-text/javascript"></script>
+	<script src="vendor/datepicker/daterangepicker.js" type="4a061543b3ab991da7fc1126-text/javascript"></script>
+	<script src="js/global.js" type="4a061543b3ab991da7fc1126-text/javascript"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="4a061543b3ab991da7fc1126-text/javascript"></script>
+	<script type="4a061543b3ab991da7fc1126-text/javascript">
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-23581568-13');
+	</script>
+	<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="4a061543b3ab991da7fc1126-|49" defer=""></script>
+</body>
+</html>

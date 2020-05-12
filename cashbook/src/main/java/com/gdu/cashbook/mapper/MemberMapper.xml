@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- package에 이름과 xml의 이름을 적어 주소를 부른다 -->
+<mapper namespace="com.gdu.cashbook.mapper.MemberMapper"> 
+   <insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
+      INSERT INTO member(
+         member_id,
+         member_pw,
+         member_name,
+         member_phone,
+         member_address,
+         member_email
+      )VALUES(
+         #{memberId},
+         #{memberPw},
+         #{memberName},
+         #{memberPhone},
+         #{memberAddress},
+         #{memberEmail}
+      )
+   </insert>
+</mapper>
