@@ -30,4 +30,11 @@
 		WHERE member_id = #{memberId}
 		AND member_pw = #{memberPw}	
 	</select>
+	<select id ="selectMemberId" parameterType="String" resultType = "String">
+		SELECT
+			member_id
+		FROM member
+		WHERE member_id=#{memberIdCheck}
+		
+	</select>
 </mapper>
