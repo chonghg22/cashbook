@@ -3,22 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <!-- package에 이름과 xml의 이름을 적어 주소를 부른다 -->
-<mapper namespace="com.gdu.cashbook.mapper.MemberMapper"> 
-   <insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
-      INSERT INTO member(
-         member_id,
-         member_pw,
-         member_name,
-         member_phone,
-         member_address,
-         member_email
-      )VALUES(
-         #{memberId},
-         #{memberPw},
-         #{memberName},
-         #{memberPhone},
-         #{memberAddress},
-         #{memberEmail}
-      )
-   </insert>
+<mapper namespace="com.gdu.cashbook.mapper.MemberMapper">
+	
+	<insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
+		INSERT INTO member(
+			member_id,
+			member_pw,
+			member_name,
+			member_phone,
+			member_address,
+			member_email
+		)VALUES(
+			#{memberId},
+			#{memberPw},
+			#{memberName},
+			#{memberPhone},
+			#{memberAddress},
+			#{memberEmail}
+		)
+	</insert>
+	<select id="selectLoginMember" parameterType="com.gdu.cashbook.vo.LoginMember" resultType="com.gdu.cashbook.vo.LoginMember">
+		SELECT 
+			member_id as memberId,
+			member_pw as memberPw
+		FROM member
+		WHERE member_id = #{memberId}
+		AND member_pw = #{memberPw}	
+	</select>
 </mapper>
