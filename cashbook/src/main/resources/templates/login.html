@@ -173,8 +173,8 @@ $(document).ready(function(){
             <input type="button" value="로그인" id = "btn">            
             <div><a type = "button" href = "/index"  >처음으로</a></div>
             <br>
-            <div><a href = ""  >아이디를 모르겠어요</a></div>
-            <div><a href = ""  >비밀번호를 모르겠어요</a></div>
+            <div><a th:href="@{/findMemberId}"  >아이디를 모르겠어요</a></div>
+            <div><a th:href="@{/findMemberPw}"  >비밀번호를 모르겠어요</a></div>
             <div><span th:text="${msg}"></span></div>
             
         </form>

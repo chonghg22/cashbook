@@ -42,7 +42,10 @@
 <body><div class="login-box">
         <h1>회원정보</h1>
         
-      	
+      	<div>
+      		<div class = "name">사용자 이미지</div>      		
+            <img th:src="@{${'/upload/'+member.memberPic}}">       		
+       </div> 
 		<div>
       		<div class = "name">아이디</div>      		
             <input type="text" th:value = "${member.memberId}" required>
