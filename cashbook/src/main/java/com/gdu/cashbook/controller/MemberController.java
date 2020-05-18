@@ -17,6 +17,56 @@ import com.gdu.cashbook.vo.Member;
 public class MemberController {
 	@Autowired
 	MemberService memberService;
+	@GetMapping("/modifyMemberInfo")
+	public String modifyMember(Model model, LoginMember loginMember, HttpSession session) {
+		if(session.getAttribute("loginMember")== null) {
+			return "redirect:/index";
+		}
+		Member member = memberService.getModifyMemberOne(loginMember);
+		model.addAttribute("loginMember", loginMember);
+		model.addAttribute("member", member);
+		return "memberModify";
+	}
+	@PostMapping("/modifyMemberInfo")
+	public String modifyMember(Model model, Member member, HttpSession session) {
+		if(session.getAttribute("loginMember")==null) {
+			return "redirect:/index";
+		}
+		String modifyPwCk = memberService.modifyPwCk(member.getMemberPw());
+		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
+		int modifyMember = 0;
+		if(modifyPwCk !=null) {
+			modifyMember = memberService.modifyMemberInfo(member);
+		}else {
+			model.addAttribute("loginMember", loginMember);
+			return "memberInfo";
+		}
+		if(modifyMember == 1) {
+			System.out.println("수정성공");
+		}else {
+			System.out.println("수정실패");
+		}
+		return "redirect:/memberInfo";
+	}
+	@GetMapping("/removeMember")
+	public String removeMember(HttpSession session, LoginMember loginMember) {
+		if(session.getAttribute("loginMember")==null) {
+			return "/redirect:/index";
+		}
+		return "removeMember";
+	}
+	@PostMapping("/removeMember")
+	public String removeMember(HttpSession session, @RequestParam("memberPw") String memberPw) {
+		if(session.getAttribute("loginMember")==null) {
+			return "redirect:/index";
+		}
+		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
+		loginMember.setMemberPw(memberPw);
+		memberService.removeMember(loginMember);
+		session.invalidate();
+		return "redirect:/index";
+	}
+	
 	@GetMapping("/memberInfo")
 	public String memberInfo(Model model, HttpSession session) {
 		if(session.getAttribute("loginMember")== null) {
@@ -25,6 +75,7 @@ public class MemberController {
 		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
 		Member member = memberService.getMemberOne(loginMember);
 		model.addAttribute("member", member);
+		model.addAttribute("loginMember", loginMember);
 		return "memberInfo";
 	}
 	
@@ -67,7 +118,7 @@ public class MemberController {
 			return "login";
 		}else {
 			session.setAttribute("loginMember", returnLoginMember);
-			return "redirect:/home";
+			return "home";
 		}
 		
 	}
@@ -97,4 +148,5 @@ public class MemberController {
 		memberService.insertMember(member);
 	          	return "redirect:/index";
 	}
+	
 }

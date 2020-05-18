@@ -11,4 +11,9 @@ public interface MemberMapper {
 	public LoginMember selectLoginMember(LoginMember loginMember);
 	public void insertMember(Member member);
 	public Member selectMemberOne(LoginMember loginMember);
+	public String updatePwCk(String memberPw);
+	public int updateMemberInfo(Member member);
+	public Member updateMemberOne(LoginMember loginMember);
+	public void deleteMember(LoginMember loginMember);
+	public Member selectmemberOne(LoginMember loginMember);
 }

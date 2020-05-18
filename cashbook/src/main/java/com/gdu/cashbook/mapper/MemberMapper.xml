@@ -4,7 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <!-- package에 이름과 xml의 이름을 적어 주소를 부른다 -->
 <mapper namespace="com.gdu.cashbook.mapper.MemberMapper">
-	
+	<update id = "updateMemberInfo" parameterType="com.gdu.cashbook.vo.Member">
+		UPDATE member
+			SET
+				member_address = #{memberAddress},
+				member_name = #{memberName},
+				member_phone = #{memberPhone},
+				member_email = #{memberEmail}
+			WHERE member_id = #{memberId}
+	</update>
+	<select id = "updatePwCk" resultType = "String" parameterType = "int">
+		SELECT
+			PASSWORD(member_pw)
+		FROM member
+		WHERE member_pw = PASSWORD(#{memberPw})
+	</select>
 	<insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
 		INSERT INTO member(
 			member_id,
@@ -12,28 +26,50 @@
 			member_name,
 			member_phone,
 			member_address,
-			member_email
+			member_email,
+			member_date
 		)VALUES(
 			#{memberId},
-			#{memberPw},
+			PASSWORD(#{memberPw}),
 			#{memberName},
 			#{memberPhone},
 			#{memberAddress},
-			#{memberEmail}
+			#{memberEmail},
+			NOW()
 		)
 	</insert>
+	<select id = "updateMemberOne" resultType = "com.gdu.cashbook.vo.Member" parameterType = "com.gdu.cashbook.vo.LoginMember">
+		SELECT
+			member_id memberId,
+			member_pw memberPw,
+			member_date memberDate
+		FROM member
+		WHERE member_id = #{memberId}
+	</select>
+	<delete id = "deleteMember" parameterType = "com.gdu.cashbook.vo.LoginMember">
+		DELETE 
+		FROM member
+		WHERE member_id = #{memberId}
+		AND member_pw = PASSWORD(${memberPw})	
+	</delete>
 	<select id="selectLoginMember" parameterType="com.gdu.cashbook.vo.LoginMember" resultType="com.gdu.cashbook.vo.LoginMember">
 		SELECT 
 			member_id as memberId,
 			member_pw as memberPw
 		FROM member
 		WHERE member_id = #{memberId}
-		AND member_pw = #{memberPw}	
+		AND member_pw = PASSWORD(#{memberPw})	
 	</select>
 	<select id ="selectMemberId" parameterType="String" resultType = "String">
 		SELECT
 			member_id
-		FROM member
+		FROM 
+		(
+			SELECT member_id FROM member
+			UNION
+			SELECT member_id FROM memberid
+		)t
+		
 		WHERE member_id=#{memberIdCheck}		
 	</select>
 	<select id = "selectMemberOne" resultType = "com.gdu.cashbook.vo.Member" parameterType = "com.gdu.cashbook.vo.LoginMember">

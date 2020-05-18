@@ -73,6 +73,10 @@
             <input  type="text" th:value = "${member.memberDate}"  required>
        		<span id = "emailHelper"></span>
        </div>                   
+		 <div><a type = "button" th:href = "@{/removeMember(memberId=${loginMember.memberId})}"  >회원탈퇴</a></div>
+		 <br>
+		 <div><a type = "button" th:href = "@{/modifyMemberInfo(memberId=${loginMember.memberId})}"  >정보수정</a></div>
+		 <br>
 		 <div><a type = "button" href = "/home"  >홈으로</a></div>
         </div> 	
 	

@@ -4,51 +4,58 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- jQuery library -->
+<link href="/css/registerForm.css" rel="stylesheet" media="all">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
-		$('#mdiBtn').click(function(){
-
+		$('#modiBtn').click(function(){
+			$('#modifyForm').submit();			
 		});
 	});
 
 </script>
-</head>
+</head> 
 <body>
-	<h1>정보수정</h1>
-		<div th:include="/include/menu::sidemenu"></div>
-		<form action="/modifyMemberInfo" method="post">
-			<table class="table">
-				<tr>
-					<td>아이디</td>
-					<td><input type="text" value="" name="memberId" id="memberId"></td>
-				</tr>
-				<tr>
-					<td>주소</td>
-					<td><input type="text" name="memberAddr" id="memberAddr"></td>
-				</tr>
-				<tr>
-					<td>전화번호</td>
-					<td><input type="text" name="memberPhone" id="memberPhone"></td>
-				</tr>
-				<tr>
-					<td>이메일</td>
-					<td><input type="text" name="memberEmail" id="memberEmail"></td>
-				</tr>
-				<tr>
-					<td>가입날짜</td>
-					<td><input type="text" value="" name="memberDate" id="memberDate"></td>
-				</tr>
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="text" name="memberPw" id="memberPw"></td>
-				</tr>
-				<tr>
-					<td>비밀번호 확인</td>
-					<td><input type="text" id="memberPw2"></td>
-				</tr>
-			</table>
-		</form>
-			<button id="modiBtn" class="btn btn-primary">정보수정</button>
+	<div class="login-box">
+        <h1>정보수정</h1>        
+		<form id="modifyForm" th:action="@{/modifyMemberInfo}" method="post">
+		<div>
+      		<div class = "name">아이디</div>      		
+           <input type="text" th:value="${member.memberId}" name="memberId" readonly="readonly">       		
+       </div>
+       <div>
+      		<div class = "name">이름</div>    		
+            <input type="text" name="memberName" id = "memberName">
+       	
+       </div>
+      
+       <div>
+      		<div class = "name">주소</div>      		
+           <input type="text" name="memberAddress" id="memberAddress">
+       		
+       </div>
+       <div>
+      		<div class = "name">전화번호</div>       		
+            <input type="text" name="memberPhone" id="memberPhone">
+       		
+       </div>
+       <div>
+      		<div class = "name">이메일</div>      		
+           <input type="text" name="memberEmail" id="memberEmail">
+       		
+       </div>
+       <div>
+      		<div class = "name">가입날짜</div>     		
+           <input type="text" th:value="${member.memberDate}" readonly = "readonly">
+       </div>
+       <div>
+      		<div class = "name">비밀번호</div>     		
+          <input type="password" name="memberPw" id="memberPw">
+       </div>
+       <div>
+			<button type="button" id="modiBtn">정보수정</button>
+		</div>            
+        </form>
+        </div> 	
 </body>
-</html> 
+</html>
