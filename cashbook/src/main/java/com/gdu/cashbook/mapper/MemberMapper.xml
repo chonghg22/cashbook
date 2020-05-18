@@ -34,7 +34,17 @@
 		SELECT
 			member_id
 		FROM member
-		WHERE member_id=#{memberIdCheck}
-		
+		WHERE member_id=#{memberIdCheck}		
+	</select>
+	<select id = "selectMemberOne" resultType = "com.gdu.cashbook.vo.Member" parameterType = "com.gdu.cashbook.vo.LoginMember">
+	SELECT
+		member_id memberId,
+		member_name memberName,
+		member_address memberAddress,
+		member_phone memberPhone,
+		member_email memberEmail,
+		member_date memberDate
+	FROM member
+	WHERE member_id = #{memberId}
 	</select>
 </mapper>

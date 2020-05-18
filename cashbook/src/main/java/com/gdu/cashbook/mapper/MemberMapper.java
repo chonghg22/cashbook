@@ -10,4 +10,5 @@ public interface MemberMapper {
 	public String selectMemberId(String memberidCheck);
 	public LoginMember selectLoginMember(LoginMember loginMember);
 	public void insertMember(Member member);
+	public Member selectMemberOne(LoginMember loginMember);
 }

@@ -17,6 +17,17 @@ import com.gdu.cashbook.vo.Member;
 public class MemberController {
 	@Autowired
 	MemberService memberService;
+	@GetMapping("/memberInfo")
+	public String memberInfo(Model model, HttpSession session) {
+		if(session.getAttribute("loginMember")== null) {
+			return "redirect:/index";
+		}
+		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
+		Member member = memberService.getMemberOne(loginMember);
+		model.addAttribute("member", member);
+		return "memberInfo";
+	}
+	
 	@PostMapping("/checkMemberId")
 	public String checkMemberId(Model model, HttpSession session, @RequestParam("memberIdCheck") String memberIdCheck) {
 		if(session.getAttribute("loginMember") != null) {
@@ -56,7 +67,7 @@ public class MemberController {
 			return "login";
 		}else {
 			session.setAttribute("loginMember", returnLoginMember);
-			return "redirect:/index";
+			return "redirect:/home";
 		}
 		
 	}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- jQuery library -->
+<link href="/css/registerForm.css" rel="stylesheet" media="all">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+.login-box a[type="button"]{
+    width: 40%;
+    border: none;
+    outline: none;
+    background: #156DA9;
+    padding: 10px 52px;
+    border-radius: 30px;
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.login-box a[type="button"]:hover{
+    background:#6FD653;
+   transition: .2s;
+}
+
+
+
+.login-box a {
+    text-decoration: none;
+    font-size: 12px;
+    color: #00bcd4;
+}
+
+.login-box a:hover{
+    color: #6FD653;
+}
+</style>
+</head>
+<body><div class="login-box">
+        <h1>회원정보</h1>
+        
+      	
+		<div>
+      		<div class = "name">아이디</div>      		
+            <input type="text" th:value = "${member.memberId}" required>
+       		<span id = "idHelper"></span>
+       </div>      
+       <div>
+      		<div class = "name">사용자 이름</div>      		
+            <input type="text" th:value = "${member.memberName}" required>
+       		<span id = "nameHelper"></span>
+       </div>
+       <div>
+      		<div class = "name">전화번호</div>       		
+            <input  type="text" th:value = "${member.memberPhone}"  required>
+       		<span id = "phoneHelper"></span>
+       </div>
+       <div>
+      		<div class = "name">주소</div>      		
+            <input  type="text" th:value = "${member.memberAddress}" required>
+       		<span id = "addressHelper"></span>
+       </div>
+       <div>
+      		<div class = "name">이메일</div>     		
+            <input  type="text" th:value = "${member.memberEmail}"  required>
+       		<span id = "emailHelper"></span>
+       </div>
+       <div>
+      		<div class = "name">가입날짜</div>     		
+            <input  type="text" th:value = "${member.memberDate}"  required>
+       		<span id = "emailHelper"></span>
+       </div>                   
+		 <div><a type = "button" href = "/home"  >홈으로</a></div>
+        </div> 	
+	
+</body>
+</html> 

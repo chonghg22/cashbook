@@ -20,4 +20,7 @@ public class MemberService {
 	public String checkMemberId(String memberIdCheck) {
 		return memberMapper.selectMemberId(memberIdCheck);
 	}
+	public Member getMemberOne(LoginMember loginMember) {
+		return memberMapper.selectMemberOne(loginMember);
+	}
 }
