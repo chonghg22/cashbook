@@ -18,30 +18,35 @@
 <body>
 	<div class="login-box">
         <h1>정보수정</h1>        
-		<form id="modifyForm" th:action="@{/modifyMemberInfo}" method="post">
+		<form id="modifyForm" th:action="@{/modifyMemberInfo}" method="post" enctype="multipart/form-data">
+		<div>
+      		<div class = "name">사진</div>
+      		<div><img th:src="@{${'/upload/'+member.memberPic}}"></div>      		
+           <input type="file" th:value="${member.memberPic}" name="memberPic" id = "memberPic">       		
+       </div>
 		<div>
       		<div class = "name">아이디</div>      		
            <input type="text" th:value="${member.memberId}" name="memberId" readonly="readonly">       		
        </div>
        <div>
       		<div class = "name">이름</div>    		
-            <input type="text" name="memberName" id = "memberName">
+            <input type="text" name="${member.memberName}" id = "memberName">
        	
        </div>
       
        <div>
       		<div class = "name">주소</div>      		
-           <input type="text" name="memberAddress" id="memberAddress">
+           <input type="text" name="${member.memberAddress}" id="memberAddress">
        		
        </div>
        <div>
       		<div class = "name">전화번호</div>       		
-            <input type="text" name="memberPhone" id="memberPhone">
+            <input type="text" name="${member.memberPhone}" id="memberPhone">
        		
        </div>
        <div>
       		<div class = "name">이메일</div>      		
-           <input type="text" name="memberEmail" id="memberEmail">
+           <input type="text" name="${member.memberEmail}" id="memberEmail">
        		
        </div>
        <div>

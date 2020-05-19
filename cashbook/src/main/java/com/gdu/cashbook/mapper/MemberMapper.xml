@@ -2,7 +2,6 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <!-- package에 이름과 xml의 이름을 적어 주소를 부른다 -->
 <mapper namespace="com.gdu.cashbook.mapper.MemberMapper">
 	<!-- DBMS와 VO의 컬럼명 불일치를 해결하기 위해 사용하는 태그  -->
 	<!-- <resultMap type="" id=""></resultMap> -->
@@ -12,6 +11,13 @@
 		2. 사용자가 입력한 id의 변경된 pw를 select
 		3. 2번에서 변경된 pw를 사용자의 이메일로 전송
 	 -->
+	 
+	 <!-- 회원 사진을 가지고 오는 쿼리 -->
+	 <select id="selectMemberPic" resultType="String" parameterType="String">
+	 	SELECT member_pic
+	 	FROM member
+	 	WHERE member_id = #{memberId}
+	 </select>
 	 <update id="updateMemberPw" parameterType="com.gdu.cashbook.vo.Member">
 	 	UPDATE member 
 	 	SET
@@ -35,85 +41,101 @@
 		AND member_email = #{memberEmail}
 	</select>
 	<!-- 회원정보를 수정하는 쿼리 -->
-	<update id = "updateMemberInfo" parameterType="com.gdu.cashbook.vo.Member">
+	<update id="updateMemberInfo" parameterType="com.gdu.cashbook.vo.Member">
 		UPDATE member
-			SET
-				member_address = #{memberAddress},
-				member_name = #{memberName},
-				member_phone = #{memberPhone},
-				member_email = #{memberEmail},
-				member_pic = ${memberPic}
-			WHERE member_id = #{memberId}
+		SET
+			member_address = #{memberAddress},
+			member_name = #{memberName},
+			member_phone = #{memberPhone},
+			member_email = #{memberEmail},
+			member_pic = #{memberPic}
+		WHERE member_id = #{memberId}
 	</update>
-	<select id = "updatePwCk" resultType = "String" parameterType = "int">
+	<!-- 미완성 -->
+	<select id="updatePwCk" resultType="String" parameterType="int">
 		SELECT
 			PASSWORD(member_pw)
 		FROM member
 		WHERE member_pw = PASSWORD(#{memberPw})
 	</select>
-	<insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
-		INSERT INTO member(
-			member_id,
-			member_pw,
-			member_name,
-			member_phone,
-			member_address,
-			member_email,
-			member_date
-		)VALUES(
-			#{memberId},
-			PASSWORD(#{memberPw}),
-			#{memberName},
-			#{memberPhone},
-			#{memberAddress},
-			#{memberEmail},
-			NOW()
-		)
-	</insert>
-	<select id = "updateMemberOne" resultType = "com.gdu.cashbook.vo.Member" parameterType = "com.gdu.cashbook.vo.LoginMember">
+	<!-- 회원수정을 위해 특정 memberId의 데이터를 받아오는 쿼리 -->
+	<select id="updateMemberOne" resultType="com.gdu.cashbook.vo.Member" parameterType="com.gdu.cashbook.vo.LoginMember">
 		SELECT
 			member_id memberId,
 			member_pw memberPw,
-			member_date memberDate
+			member_name memberName,
+			member_address memberAddress,
+			member_phone memberPhone,
+			member_email memberEmail,
+			member_date memberDate,
+			member_pic memberPic
 		FROM member
 		WHERE member_id = #{memberId}
 	</select>
-	<delete id = "deleteMember" parameterType = "com.gdu.cashbook.vo.LoginMember">
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember" parameterType="com.gdu.cashbook.vo.LoginMember">
 		DELETE 
 		FROM member
-		WHERE member_id = #{memberId}
-		AND member_pw = PASSWORD(${memberPw})	
+		WHERE member_id = ${memberId}
+		AND member_pw = PASSWORD(${memberPw})
 	</delete>
-	<select id="selectLoginMember" parameterType="com.gdu.cashbook.vo.LoginMember" resultType="com.gdu.cashbook.vo.LoginMember">
-		SELECT 
-			member_id as memberId,
-			member_pw as memberPw
+	<!-- 회원정보 가지고 오는 쿼리 -->
+	<select id="selectMemberOne" resultType="com.gdu.cashbook.vo.Member" parameterType="com.gdu.cashbook.vo.LoginMember">
+		SELECT
+			member_id memberId,
+			member_name memberName,
+			member_address memberAddress,
+			member_phone memberPhone,
+			member_email memberEmail,
+			member_date memberDate,
+			member_pic memberPic
 		FROM member
 		WHERE member_id = #{memberId}
-		AND member_pw = PASSWORD(#{memberPw})	
 	</select>
-	<select id ="selectMemberId" parameterType="String" resultType = "String">
-		SELECT
+	<!-- 중복체크를 위해 member_id를 가져오는 쿼리  -->
+	<select id="selectCheckMemberId" resultType="String" parameterType="String">
+		SELECT 
 			member_id
 		FROM 
-		(
+		(	
 			SELECT member_id FROM member
 			UNION
 			SELECT member_id FROM memberid
-		)t
-		
-		WHERE member_id=#{memberIdCheck}		
+		) t
+		WHERE member_id=#{memberIdCk}
 	</select>
-	<select id = "selectMemberOne" resultType = "com.gdu.cashbook.vo.Member" parameterType = "com.gdu.cashbook.vo.LoginMember">
-	SELECT
-		member_id memberId,
-		member_name memberName,
-		member_address memberAddress,
-		member_phone memberPhone,
-		member_email memberEmail,
-		member_date memberDate,
-		member_pic memberPic
-	FROM member
-	WHERE member_id = #{memberId}
+	<!-- 로그인시 아이디 비밀번호 확인 -->
+	<select id="selectLoginMember" resultType="com.gdu.cashbook.vo.LoginMember" parameterType="com.gdu.cashbook.vo.LoginMember">
+	 	SELECT 
+	 		member_id memberId, 
+	 		member_pw memberPw
+	 	FROM member
+	 	WHERE member_id = #{memberId}
+	 	AND member_pw = PASSWORD(#{memberPw})
 	</select>
+	<!-- 회원가입 쿼리 -->
+	<insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
+		INSERT INTO member
+		(
+			member_id, 
+			member_pw,
+			member_name, 
+			member_address, 
+			member_phone, 
+			member_email,
+			member_date,
+			member_pic
+		)
+		VALUES
+		(
+			#{memberId}, 
+			PASSWORD(#{memberPw}),
+			#{memberName}, 
+			#{memberAddress}, 
+			#{memberPhone}, 
+			#{memberEmail},
+			NOW(),
+			#{memberPic}
+		)
+	</insert>
 </mapper>
