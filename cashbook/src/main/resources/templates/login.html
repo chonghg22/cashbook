@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<style>
+/* CSS for sky theme end*/
+/*
+css for login start
+/*  #156DA9 blue
+    #00BCD4
+    #6FD653 bhover
+    #F6F6F6 */
+
+body{
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+   
+
+}
+
+.box{
+    width: 350px;
+    height: 330px;
+    background: #ffffff;
+    padding: 60px 15px;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid #A6A6A6;
+    -webkit-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
+
+}
+
+.box h1{
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #000000;
+}
+
+.box input[type="text"],
+.box input[type="password"]{
+   width: 60%;
+    margin-bottom: 20px;
+}
+
+.box input[type="text"],
+.box input[type="password"]{
+    border-radius: 5px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 1px solid #A6A6A6;
+    font-size: 13px;
+    height: 40px;
+    text-align: center;
+    transition: 0.27s;
+}
+.box input[type="text"]:focus,
+.box input[type="password"]:focus{
+width: 80%;
+border-color:#6fd653;
+}
+
+.box input[type="button"]{
+    width: 210px;
+    border: none;
+    outline: none;
+    background: #368AFF;
+    padding: 10px 0;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.box input[type="button"]:hover{
+    background:#6FD653;
+   transition: .2s;
+}
+
+.box input[type="button"]:focus{
+   transform: scaleX(1.1);
+}
+.box a[type="button"]{
+    width: 40%;
+    border: none;
+    outline: none;
+    background: #368AFF;
+    padding: 10px 80px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.box a[type="button"]:hover{
+    background:#6FD653;
+   transition: .2s;
+}
+
+
+
+.box a {
+    text-decoration: none;
+    font-size: 12px;
+    color: #0054FF;
+}
+
+.box a:hover{
+    color: #6FD653;
+}
+btn{
+    width: 40%;
+    border: none;
+    outline: none;
+    background: #156DA9;
+    padding: 10px 0;
+    border-radius: 30px;
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+btn:hover{
+    background:#6FD653;
+   transition: .2s;
+}
+
+btn:focus{
+    transform: scaleX(1.1);
+}
+
+/*
+css login end
+*/
+
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#btn').click(function(){
+		$('#loginForm').submit();
+	});
+});
+</script>
+</head>
+<body>
+
+	<!-- 
+	<h1 th:text="${}">가계부</h1> <- ${}변수값 기입할때 사용 
+	-->
+	<div class="box">
+        <h1>로그인</h1>
+        <form  method = "post" action="/login" id = "loginForm">
+            <input type="text" name="memberId" id="memberId" placeholder="아이디"  required>            
+            <input type="password" name = "memberPw" id="memberPw" placeholder="비밀번호" required>            
+            <input type="button" value="로그인" id = "btn">            
+            <div><a type = "button" href = "/index"  >처음으로</a></div>
+            <br>
+            <div><a th:href="@{/findMemberId}"  >아이디를 모르겠어요</a></div>
+            <div><a th:href="@{/findMemberPw}"  >비밀번호를 모르겠어요</a></div>
+            <div><span th:text="${msg}"></span></div>
+            
+        </form>
+        </div> 	
+</body>
+</html>

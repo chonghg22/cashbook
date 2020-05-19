@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- package에 이름과 xml의 이름을 적어 주소를 부른다 -->
+<mapper namespace="com.gdu.cashbook.mapper.CashMapper">
+	<select id = "selectCashListByToday"
+			parameterType = "com.gdu.cashbook.vo.Cash"
+			resultType = "com.gdu.cashbook.vo.Cash">
+		SELECT
+			cash_no as cashNo,
+			cash_kind as cashKind,
+			category_name as categoryName,
+			cash_price as cashPrice,
+			cash_place as cashPlace,
+			cash_memo as cashMemo
+		FROM cash
+		WHERE member_id = #{memberId}
+		AND cash_date = #{cashDate}
+		ORDER BY cash_no ASC		
+	
+	</select>
+	
+		<select id="selectCashKindSum" parameterType="com.gdu.cashbook.vo.Cash" resultType="int">
+      SELECT
+         (SELECT IFNULL(SUM(cash_price), 0)
+         FROM cash
+         WHERE member_id= #{memberId} AND cash_kind = '수입' AND cash_date = #{cashDate})
+         -
+         (SELECT IFNULL(SUM(cash_price), 0)
+         FROM cash
+         WHERE member_id= #{memberId} AND cash_kind = '지출' AND cash_date = #{cashDate})
+      FROM dual   
+   </select>
+
+</mapper>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:text = "${day}"></div>
+<div>
+<!-- 
+	<a th:href="@{/getCashListByDate(day=${day.plusDays(-1)})}">이전</a>
+	<a th:href="@{/getCashListByDate(day=${day.plusDays(+1)})}">다음</a>
+-->
+</div>
+<table border = "1">
+<thead>
+<tr>
+	<th>&nbsp;</th>
+	<th>카테고리</th>
+	<th>수입</th>
+	<th>지출</th>
+	<th>장소</th>
+	<th>메모</th>
+	<th>삭제</th>
+	<th>수정</th>	
+</tr>
+</thead>
+<tbody>
+<tr th:each="cash, index : ${cashList}">
+	<td th:text = "${index.index}+1"></td>
+	<td th:text = "${cash.categoryName}"></td>
+	
+	<!-- thymeleaf if~else문 : if/unless -->
+	<td th:if="${cash.cashKind} == '수입'" th:text = "${'+' + cash.cashPrice}"></td>
+	<td th:unless="${cash.cashKind}=='수입'"></td>
+	<td th:if="${cash.cashKind} == '지출'" th:text = "${'-' + cash.cashPrice}"></td>
+	<td th:unless="${cash.cashKind} == '지출'"></td>
+	
+	
+	<td th:text = "${cash.cashPrice}"></td>
+	<td th:text = "${cash.cashMemo}"></td>
+	<td>삭제</td>
+	<td>수정</td>
+	</tr>
+</tbody>
+</table>
+
+<div>(수입+지출)합계: <span th:text="${cashKindSum}"></span></div>
+
+</body>
+</html>
