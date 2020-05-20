@@ -7,10 +7,10 @@
 <body>
 <div th:text = "${day}"></div>
 <div>
-<!-- 
+
 	<a th:href="@{/getCashListByDate(day=${day.plusDays(-1)})}">이전</a>
 	<a th:href="@{/getCashListByDate(day=${day.plusDays(+1)})}">다음</a>
--->
+
 </div>
 <table border = "1">
 <thead>
@@ -33,6 +33,7 @@
 	<!-- thymeleaf if~else문 : if/unless -->
 	<td th:if="${cash.cashKind} == '수입'" th:text = "${'+' + cash.cashPrice}"></td>
 	<td th:unless="${cash.cashKind}=='수입'"></td>
+	<!-- 삼황연산자 -->
 	<td th:if="${cash.cashKind} == '지출'" th:text = "${'-' + cash.cashPrice}"></td>
 	<td th:unless="${cash.cashKind} == '지출'"></td>
 	

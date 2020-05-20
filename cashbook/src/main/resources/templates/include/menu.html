@@ -3,23 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <title>Menu</title>
+<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700italic,700,400italic|PT+Serif:400,700,400italic,700italic|Vollkorn|Rokkitt:400,700' rel='stylesheet' type='text/css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href = "/css/sidemenu.css" media = "all">
 </head>
 <body>
+  <nav>
+  <a href="#" id="userPLink">
+    <span class="fa fa-user"></span>
+    username 
+  </a>
+  <div id="sideMenu">
+    <span class="fa fa-navicon" id="sideMenuClosed"></span>
+  </div>
+</nav>
 	<!-- fragments1 -->
-	<div th:fragment="sidemenu">
+	<div th:fragment="sidemenu"  id="sideMenuContainer">
+		<h2>구디 가계부</h2>
 		<div><span th:text="${session.loginMember.memberId}"></span>님</div>
 		<ul>
-			<li><a th:href="@{/home}">홈</a></li>
+			<li><a th:href="@{/home}" title="Bootstrap">홈</a> <span class="fa fa-bolt"></span></li>
 		</ul>
 		<ul>
-			<li><a th:href="@{/memberInfo}">회원정보</a></li>
+			<li><a th:href="@{/memberInfo}">회원정보</a> <span class="fa fa-map"></span></li>
 		</ul>
 		<ul>
-			<li><a th:href="@{/getCashListByDate}">가계부 관리</a></li>
+			<li><a th:href="@{/getCashListByDate}">일별 가계부 관리</a><span class="fa fa-info-circle"></span></li>
 		</ul>
 		<ul>
-			<li><a th:href="@{/logout}">로그아웃</a></li>
+			<li><a th:href="@{/getCashListByMonth}">월별 가계부 관리</a><span class="fa fa-users"></span></li>
+		</ul>
+		<ul>
+			<li><a th:href="@{/logout}">로그아웃</a><span class="fa fa-camera"></span></li>
 		</ul>
 	</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js'></script>
+<script src='js/sideToggle/sideToggleExtended.js'></script>
+
+<script>
+    
+$(document).ready(function(){
+  $('#sideMenu').sideToggle({
+    moving: '#sideMenuContainer',
+    direction: 'right'
+  });
+
+});
+</script>
+
 </body>
-</html> 
+</html>
+ 
