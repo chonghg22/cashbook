@@ -2,51 +2,116 @@
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<link rel="stylesheet" href = "css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+.extable{
+	position:absolute;
+	top:250px;
+	left:200px;
+	width:900px;
+	height:337px;
+	border: 1px;
+	
+}
+table.tableset{
+	border: 3px; 
+}
+th.dateTitle{
+	border: 2px solid #D5D5D5;
+	width: 800px;
+	height: 30px;
+	text-align: center;
+	background: #EAEAEA;
+	font-weight: bolder;
+}
+td.content{
+	border: 2px solid #D5D5D5;
+	width: 800px;
+	height: 50px;
+	text-align: center;
+	background: #FFFFFF;
+}
+div.day{
+	text-align: center;
+	font-size: 30px;
+}
+.left{
+	text-align: left;
+}
+.right{
+	text-align: right;
+}
+</style>
 </head>
 <body>
-<div th:text = "${day}"></div>
-<div>
+<div class="container-fleid">
+	<div class="row">
+		<div class="col-sm-3">
+			<div th:include="/include/menu::sidemenu"></div> 
+		</div>
+		<div class="col-sm-6">
 
-	<a th:href="@{/getCashListByDate(day=${day.plusDays(-1)})}">이전</a>
-	<a th:href="@{/getCashListByDate(day=${day.plusDays(+1)})}">다음</a>
+<div class = "extable">
+		<div class = "day" th:text = "${day}"></div>
+<div >
+
+	<a class = "left" th:href="@{/getCashListByDate(day=${day.plusDays(-1)})}">이전</a>
+	
+	
+	<a class = "right" th:href="@{/getCashListByDate(day=${day.plusDays(+1)})}">다음</a>
 
 </div>
-<table border = "1">
+<table class = "tableset">
 <thead>
-<tr>
-	<th>&nbsp;</th>
-	<th>카테고리</th>
-	<th>수입</th>
-	<th>지출</th>
-	<th>장소</th>
-	<th>메모</th>
-	<th>삭제</th>
-	<th>수정</th>	
+<tr >
+	<th class = "dateTitle">No</th>
+	<th class = "dateTitle">카테고리</th>
+	<th class = "dateTitle">수입</th>
+	<th class = "dateTitle">지출</th>
+	<th class = "dateTitle">장소</th>
+	<th class = "dateTitle">메모</th>
+	<th class = "dateTitle">삭제</th>
+	<th class = "dateTitle">수정</th>	
 </tr>
 </thead>
 <tbody>
 <tr th:each="cash, index : ${cashList}">
-	<td th:text = "${index.index}+1"></td>
-	<td th:text = "${cash.categoryName}"></td>
+	<td class = "content" th:text = "${index.index}+1"></td>
+	<td class = "content"  th:text = "${cash.categoryName}"></td>
 	
 	<!-- thymeleaf if~else문 : if/unless -->
-	<td th:if="${cash.cashKind} == '수입'" th:text = "${'+' + cash.cashPrice}"></td>
-	<td th:unless="${cash.cashKind}=='수입'"></td>
+	<td class = "content"  th:if="${cash.cashKind} == '수입'" th:text = "${'+' + cash.cashPrice}"></td>
+	<td class = "content"  th:unless="${cash.cashKind}=='수입'"></td>
 	<!-- 삼황연산자 -->
-	<td th:if="${cash.cashKind} == '지출'" th:text = "${'-' + cash.cashPrice}"></td>
-	<td th:unless="${cash.cashKind} == '지출'"></td>
+	<td class = "content"  th:if="${cash.cashKind} == '지출'" th:text = "${'-' + cash.cashPrice}"></td>
+	<td class = "content"  th:unless="${cash.cashKind} == '지출'"></td>
 	
 	
-	<td th:text = "${cash.cashPrice}"></td>
-	<td th:text = "${cash.cashMemo}"></td>
-	<td>삭제</td>
-	<td>수정</td>
+	<td class = "content"  th:text = "${cash.cashPrice}"></td>
+	<td class = "content"  th:text = "${cash.cashMemo}"></td>
+	<td class = "content" >삭제</td>
+	<td class = "content" >수정</td>
 	</tr>
 </tbody>
 </table>
 
 <div>(수입+지출)합계: <span th:text="${cashKindSum}"></span></div>
-
+		
+		</div>
+		<div class="col-sm-3">
+		
+		</div>
+	</div>
+</div>
+</div>
 </body>
 </html>

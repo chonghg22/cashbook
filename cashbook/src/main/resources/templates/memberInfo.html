@@ -2,67 +2,134 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<link rel="stylesheet" href = "css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <style>
-.centered { 
-width: 400px; position: absolute; left: 50%; margin-left: -200px; 
+.extable{
+	position:absolute;
+	top:130px;
+	left:200px;
+	width:603px;
+	height:337px;
+	border: 1px;
+	
 }
-
-
+.out{
+	position: absolute;
+	top:89px;
+	left:730px;
+	width:70px;
+	height:25px;
+	font-size : 15px;
+	background: #BDBDBD; 
+	text-align: center;
+	color: #000000;
+	font-weight: bolder;
+	border-radius: 8px;
+	
+	
+}
+.box1{
+	position: absolute;
+	top:495px;
+	left:700px;
+	width:100px;
+	height:40px;
+}
+.box2{
+	position: absolute;
+	top:540px;
+	left:700px;
+	width:100px;
+	height:40px;
+}
+td.Infotable{
+	border: 2px solid #D5D5D5;
+	width: 300px;
+	height: 50px;
+	text-align: center;
+	background: #EAEAEA;
+	font-weight: bolder;
+}
+td.Infotable-Info{
+	border: 2px solid #D5D5D5;
+	width: 650px;
+	height: 50px;
+	text-align: center;
+	
+}
 </style>
-<body><div class = "container">
+<body>
+	<div class="container-fleid">
+		<div class="row">
+			 <div class="col-sm-3">
+  				<div th:include="/include/menu::sidemenu"></div> 
+			</div>
+			 <div class="col-sm-6">
 		<div class = "centered">
         <h1 id = "Info">회원정보</h1>
         </div>
         <br>
         <br>
-        <table  class="table">
+         <div><a type = "button" class=" out" th:href = "@{/removeMember(memberId=${loginMember.memberId})}"  >회원탈퇴</a></div>
+		<div class = "extable">
+        <table >
       	<tr>
-      		<td class="td-light"><div class = "name">사용자 이미지</div></td>      		
-            <td><img  id="defaultImg" th:src="@{${'/upload/'+member.memberPic}}"></td>      		
+      		<td class = "Infotable"><div class = "name">사용자 이미지</div></td>      		
+            <td class = "Infotable-Info" ><img id="defaultImg" th:src="@{${'/upload/'+member.memberPic}}"></td>      		
        </tr> 
-		<tr>
-      		<td><div class = "name">아이디</div><td>      		
-            <td><input type="text" th:value = "${member.memberId}" required></td>
+	  
+        <tr>
+      		<td class = "Infotable">아이디</td>      		
+            <td class = "Infotable-Info"><span th:text = "${member.memberId}" ></span></td>
        		<td><span id = "idHelper"></span></td>
-       	</tr>             
+       </tr>  
        <tr>
-      		<td><div class = "name">사용자 이름</div></td>      		
-            <td><input type="text" th:value = "${member.memberName}" required></td>
+      		<td class = "Infotable">사용자 이름</td>      		
+            <td class = "Infotable-Info"><span th:text = "${member.memberName}"></span></td>
        		<td><span id = "nameHelper"></span></td>
        </tr>
        <tr>
-      		<td><div class = "name">전화번호</div>  </td>     		
-            <td><input  type="text" th:value = "${member.memberPhone}"  required></td>
+      		<td class = "Infotable">전화번호</td>     		
+            <td class = "Infotable-Info"><span th:text = "${member.memberPhone}" ></span></td>
        		<td><span id = "phoneHelper"></span></td>
        </tr>
        <tr>
-      		<td><div class = "name">주소</div></td>      		
-            <td><input  type="text" th:value = "${member.memberAddress}" required></td>
+      		<td class = "Infotable">주소</td>      		
+            <td class = "Infotable-Info"><span th:text = "${member.memberAddress}" ></span></td>
        		<td><span id = "addressHelper"></span></td>
        </tr>
        <tr>
-      		<td><div class = "name">이메일</div></td>   		
-            <td><input  type="text" th:value = "${member.memberEmail}"  required></td>
-       		<td><span id = "emailHelper"></span></td>
+      		<td class = "Infotable">이메일</td>   		
+            <td class = "Infotable-Info"><span th:text = "${member.memberEmail}" ></span></td>       		
+            <td><span id = "emailHelper"></span></td>
        </tr>
        <tr>
-      		<td><div class = "name">가입날짜</div></td>     		
-            <td><input  type="text" th:value = "${member.memberDate}"  required></td>
+      		<td class = "Infotable">가입날짜</td>     		
+            <td class = "Infotable-Info"><span th:text = "${member.memberDate}"></span></td>
        		<td><span id = "emailHelper"></span></td>
        </tr>
-       </table>                   
-		 <div><a type = "button" th:href = "@{/removeMember(memberId=${loginMember.memberId})}"  >회원탈퇴</a></div>
+       </table>
+        </div>             
+		
 		 <br>
-		 <div><a type = "button" th:href = "@{/modifyMemberInfo(memberId=${loginMember.memberId})}"  >정보수정</a></div>
+		 <div><a type = "button" class="btn btn-primary box1" th:href = "@{/modifyMemberInfo(memberId=${loginMember.memberId})}"  >정보수정</a></div>
 		 <br>
-		 <div><a type = "button" href = "/home"  >홈으로</a></div>
-        </div> 	
+		 <div><a type = "button" class="btn btn-primary box2" href = "/home"  >홈으로</a></div>
+		 </div>
+		 <div class="col-sm-3">
+  		
+			</div>
+ 	</div>
+ </div>
 	
 </body>
 </html> 

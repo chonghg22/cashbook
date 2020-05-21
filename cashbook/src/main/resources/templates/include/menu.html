@@ -2,56 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Menu</title>
-<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700italic,700,400italic|PT+Serif:400,700,400italic,700italic|Vollkorn|Rokkitt:400,700' rel='stylesheet' type='text/css'>
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css'>
-<link rel="stylesheet" href = "/css/sidemenu.css" media = "all">
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<link rel="stylesheet" href = "css/style.css">
+<title>CodePen - PURE CSS SIDEBAR TOGGLE MENU</title>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
 </head>
-<body>
-  <nav>
-  <a href="#" id="userPLink">
-    <span class="fa fa-user"></span>
-    username 
-  </a>
-  <div id="sideMenu">
-    <span class="fa fa-navicon" id="sideMenuClosed"></span>
-  </div>
-</nav>
-	<!-- fragments1 -->
+<body translate="no">
 	<div th:fragment="sidemenu"  id="sideMenuContainer">
-		<h2>구디 가계부</h2>
-		<div><span th:text="${session.loginMember.memberId}"></span>님</div>
-		<ul>
-			<li><a th:href="@{/home}" title="Bootstrap">홈</a> <span class="fa fa-bolt"></span></li>
-		</ul>
-		<ul>
-			<li><a th:href="@{/memberInfo}">회원정보</a> <span class="fa fa-map"></span></li>
-		</ul>
-		<ul>
-			<li><a th:href="@{/getCashListByDate}">일별 가계부 관리</a><span class="fa fa-info-circle"></span></li>
-		</ul>
-		<ul>
-			<li><a th:href="@{/getCashListByMonth}">월별 가계부 관리</a><span class="fa fa-users"></span></li>
-		</ul>
-		<ul>
-			<li><a th:href="@{/logout}">로그아웃</a><span class="fa fa-camera"></span></li>
+	<div class="header"></div>
+
+
+	<div id="sidebarMenu">
+		<ul class="sidebarMenuInner">
+		<li>
+			<a href="#"><span th:text="${session.loginMember.memberId}"></span> 님 안녕하세요.</a>
+		</li>
+		<li>
+			<a th:href="@{/home}" target="_blank">Home</a>
+		</li>
+		<li>
+			<a th:href="@{/memberInfo}" target="_blank">회원정보</a>
+		</li>
+		<li>
+			<a th:href="@{/getCashListByDate}" target="_blank">일별 가계부</a>
+		</li>
+		<li>
+			<a th:href="@{/getCashListByMonth}" target="_blank">월별 가계부</a>
+		</li>
+		<li>
+			<a th:href="@{/logout}" target="_blank">로그아웃</a>
+		</li>
 		</ul>
 	</div>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js'></script>
-<script src='js/sideToggle/sideToggleExtended.js'></script>
-
-<script>
-    
-$(document).ready(function(){
-  $('#sideMenu').sideToggle({
-    moving: '#sideMenuContainer',
-    direction: 'right'
-  });
-
-});
-</script>
-
+</div>
 </body>
 </html>
  
