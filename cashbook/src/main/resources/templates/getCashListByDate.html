@@ -44,11 +44,9 @@ div.day{
 	text-align: center;
 	font-size: 30px;
 }
-.left{
-	text-align: left;
-}
-.right{
-	text-align: right;
+a.insert{
+	position:absolute;
+	left:841px;
 }
 </style>
 </head>
@@ -64,11 +62,11 @@ div.day{
 		<div class = "day" th:text = "${day}"></div>
 <div >
 
-	<a class = "left" th:href="@{/getCashListByDate(day=${day.plusDays(-1)})}">이전</a>
+	<a class = "left btn btn-primary" th:href="@{/getCashListByDate(day=${day.plusDays(-1)})}">이전</a>
 	
 	
-	<a class = "right" th:href="@{/getCashListByDate(day=${day.plusDays(+1)})}">다음</a>
-
+	<a class = "right btn btn-primary" th:href="@{/getCashListByDate(day=${day.plusDays(+1)})}">다음</a>
+	<a class = "insert btn btn-primary" href = "#">추가</a>
 </div>
 <table class = "tableset">
 <thead>
@@ -98,7 +96,7 @@ div.day{
 	
 	<td class = "content"  th:text = "${cash.cashPrice}"></td>
 	<td class = "content"  th:text = "${cash.cashMemo}"></td>
-	<td class = "content" >삭제</td>
+	<td class = "content" ><a href = "#">삭제</a></td>
 	<td class = "content" >수정</td>
 	</tr>
 </tbody>
