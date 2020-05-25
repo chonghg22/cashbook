@@ -12,4 +12,5 @@ public interface CashMapper {
 	public List<DayAndPrice> selectDayAndPriceList(Map<String, Object> map );
 	public List<Cash> selectCashListByToday(Cash cash);		
 	public int selectCashKindSum(Cash cash);
+	public int insertCash(Cash cash);
 }

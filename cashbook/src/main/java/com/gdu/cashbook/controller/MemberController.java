@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.cashbook.service.MemberService;
@@ -63,14 +64,13 @@ public class MemberController {
 		model.addAttribute("findMemberId", findMemberId);
 		return "findMemberIdResult";
 	}
-	// 회원정보 수정
+	//회원정보 수정
 	@GetMapping("/modifyMemberInfo")
 	public String modifyMember(Model model, LoginMember loginMember, HttpSession session) {
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/index";
 		}
 		Member member = memberService.getModifyMemberOne(loginMember);
-		System.out.println(member + "/member/MemberController");
 		model.addAttribute("loginMember", loginMember);
 		model.addAttribute("member", member);
 		return "memberModify";
@@ -86,14 +86,14 @@ public class MemberController {
 		System.out.println(memberForm.getMemberPhone());
 		System.out.println(memberForm.getMemberPic());
 		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
-		System.out.println(loginMember + "/loginMember/MemberController");
+		
 		
 			if(memberForm.getMemberPic().getContentType().equals("image/png") || 
 					memberForm.getMemberPic().getContentType().equals("image/jpeg") ||
 					memberForm.getMemberPic().getContentType().equals("image/gif")) 
 				{ // 입력과 저장타입의 불일치로 service에서 memberForm -> member + 폴더에 파일 저장
 					int result = memberService.modifyMemberInfo(memberForm, loginMember);
-					System.out.println(result + "/result/MemberController");
+					System.out.println(result + "<-- result");
 					model.addAttribute("loginMember", loginMember);
 					return "redirect:/memberInfo";
 				}
@@ -101,7 +101,6 @@ public class MemberController {
 			model.addAttribute("loginMember", loginMember);
 			return "redirect:/memberInfo";
 		}
-		
 	
 	
 	// 회원탈퇴
@@ -147,7 +146,7 @@ public class MemberController {
 			return "redirect:/";														//index로 돌려보낸다.
 		}
 		String confirmMemberId = memberService.checkmemberId(memberIdCk);				//서비스에서 checkmemberId 메서드 호출.(회원가입시 아이디가 중복되는지 안되는지에 관한 정보를 담음)
-		System.out.println(confirmMemberId);											//디버깅
+		System.out.println(confirmMemberId + "<--confirmMemberId");											//디버깅
 		if(confirmMemberId == null) {													//중복되는 아이디가 없다면
 			model.addAttribute("memberIdCk", memberIdCk);								//memberIdCk 값을 memberIdCk 라는 변수에 담는다.
 		} else {																		//그게 아니면
@@ -195,19 +194,19 @@ public class MemberController {
 		return "addMember";															//addMember.html 파일을 불러온다.
 	}
 	@PostMapping("/addMember")
-	public String addMember(Model model, MemberForm memberForm, HttpSession session) {
-		if(session.getAttribute("loginMember") != null) {							//로그인 된 회원만 들어올 수 있음
-			return "redirect:/";													//로그인이 되어있지 않다면 index로 돌려보냄
-		}																					
-		if(memberForm.getMemberPic() != null) {										//memberPic이 null이 아니라면 아래의 png.jpeg,gif 파일을 업로드 할 수 있음
-			if(memberForm.getMemberPic().getContentType().equals("image/png") || 
-				memberForm.getMemberPic().getContentType().equals("image/jpeg") ||
-				memberForm.getMemberPic().getContentType().equals("image/gif")){			
-				memberService.addMember(memberForm);								//입력과 저장타입의 불일치로 service에서 memberForm -> member + 폴더에 파일 저장
-				return "redirect:/index";
+	public String addMember(HttpSession session, MemberForm memberForm) {
+		//System.out.println("controller" + member.toString());
+		//System.out.println(memberForm + " <--memberController.addmember memberForm");
+		if(session.getAttribute("loginMember") == null) { // 로그인 안되있을때
+			MultipartFile mf = memberForm.getMemberPic();
+			// 이미지 파일이 입력됐을때
+			if(memberForm.getMemberPic() != null && !mf.getOriginalFilename().equals("")) {
+				if(!memberForm.getMemberPic().getContentType().equals("image/png") && !memberForm.getMemberPic().getContentType().equals("image/jpeg") && !memberForm.getMemberPic().getContentType().equals("image/gif")) {
+					return "redirect:/addMember?imgMsg=n";
+				}
 			}
+			memberService.addMember(memberForm);
 		}
-		System.out.println(memberForm + "<-- addMember memberForm");				//디버깅
-		return "redirect:/addMember";												//Action이 전부 끝나면 addMember 메서드로 복귀
+		return "redirect:/index";
 	}
 }

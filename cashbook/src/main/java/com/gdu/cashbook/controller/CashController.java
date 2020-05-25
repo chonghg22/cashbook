@@ -17,14 +17,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.cashbook.service.CashService;
+import com.gdu.cashbook.service.CategoryService;
+import com.gdu.cashbook.service.MemberService;
 import com.gdu.cashbook.vo.Cash;
+import com.gdu.cashbook.vo.Category;
 import com.gdu.cashbook.vo.DayAndPrice;
 import com.gdu.cashbook.vo.LoginMember;
+import com.gdu.cashbook.vo.Member;
 
 @Controller
 public class CashController {
 	@Autowired
 	private CashService cashService;
+	private MemberService memberService;
+	private CategoryService categoryService;
+	@GetMapping("/addCash")
+	public String addCash(Model model, HttpSession session, Category category) {
+		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
+		System.out.println(loginMember + "<---loginmember");
+		category = (Category) categoryService.selectCateogryList(category);
+		System.out.println(category + "/category");
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/index";
+		}
+		model.addAttribute("loginMember", loginMember);
+		return "addCash";
+	}
 	@GetMapping("/getCashListByMonth")
 	public String getCashListByMonth(HttpSession session, Model model, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {		 
 		Calendar cDay = Calendar.getInstance();										//Calendar.getInstance는 객체를 하나만 만들고 공유해서 사용한다.

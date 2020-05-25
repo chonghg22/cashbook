@@ -12,12 +12,7 @@
 		3. 2번에서 변경된 pw를 사용자의 이메일로 전송
 	 -->
 	 
-	 <!-- 회원 사진을 가지고 오는 쿼리 -->
-	 <select id="selectMemberPic" resultType="String" parameterType="String">
-	 	SELECT member_pic
-	 	FROM member
-	 	WHERE member_id = #{memberId}
-	 </select>
+	 
 	 <update id="updateMemberPw" parameterType="com.gdu.cashbook.vo.Member">
 	 	UPDATE member 
 	 	SET
@@ -41,14 +36,14 @@
 		AND member_email = #{memberEmail}
 	</select>
 	<!-- 회원정보를 수정하는 쿼리 -->
-	<update id="updateMemberInfo" parameterType="com.gdu.cashbook.vo.Member">
+	<update id="updateMember" parameterType="com.gdu.cashbook.vo.Member">
 		UPDATE member
-		SET
+		SET member_name = #{memberName},
 			member_address = #{memberAddress},
-			member_name = #{memberName},
 			member_phone = #{memberPhone},
+			member_pic = #{memberPic},
 			member_email = #{memberEmail},
-			member_pic = #{memberPic}
+			member_pw = PASSWORD(#{memberPw})
 		WHERE member_id = #{memberId}
 	</update>
 	<!-- 미완성 -->
@@ -113,6 +108,12 @@
 	 	WHERE member_id = #{memberId}
 	 	AND member_pw = PASSWORD(#{memberPw})
 	</select>
+	<!-- 회원 사진을 가지고 오는 쿼리 -->
+	 <select id="selectMemberPic" resultType="String" parameterType="String">
+	 	SELECT member_pic
+	 	FROM member
+	 	WHERE member_id = #{memberId}
+	 </select>
 	<!-- 회원가입 쿼리 -->
 	<insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
 		INSERT INTO member
@@ -123,8 +124,8 @@
 			member_address, 
 			member_phone, 
 			member_email,
-			member_date,
-			member_pic
+			member_pic,
+			member_date
 		)
 		VALUES
 		(
@@ -134,8 +135,8 @@
 			#{memberAddress}, 
 			#{memberPhone}, 
 			#{memberEmail},
-			NOW(),
-			#{memberPic}
+			#{memberPic},
+			NOW()
 		)
 	</insert>
 </mapper>

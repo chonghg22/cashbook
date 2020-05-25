@@ -66,7 +66,7 @@ a.insert{
 	
 	
 	<a class = "right btn btn-primary" th:href="@{/getCashListByDate(day=${day.plusDays(+1)})}">다음</a>
-	<a class = "insert btn btn-primary" href = "#">추가</a>
+	<a class = "insert btn btn-primary" th:href = "@{/addCash}">추가</a>
 </div>
 <table class = "tableset">
 <thead>
@@ -94,7 +94,7 @@ a.insert{
 	<td class = "content"  th:unless="${cash.cashKind} == '지출'"></td>
 	
 	
-	<td class = "content"  th:text = "${cash.cashPrice}"></td>
+	<td class = "content"  th:text = "${cash.cashPlace}"></td>
 	<td class = "content"  th:text = "${cash.cashMemo}"></td>
 	<td class = "content" ><a href = "#">삭제</a></td>
 	<td class = "content" >수정</td>

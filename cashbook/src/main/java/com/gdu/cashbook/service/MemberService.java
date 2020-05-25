@@ -1,3 +1,4 @@
+   
 package com.gdu.cashbook.service;
 
 import java.io.File;
@@ -30,9 +31,12 @@ public class MemberService {
 	@Autowired
 	private JavaMailSender javaMailSender; //bean생성 -> @Component
 	
-	@Value("C:\\Users\\GDJ26\\Desktop\\새 폴더 (2)\\maven.1589765022199\\cashbook\\src\\main\\resources\\static\\upload")
+	@Value("C:\\Users\\JJH\\Desktop\\maven.1590374288019\\cashbook\\src\\main\\resources\\static\\upload\\ ")
 	private String path;
-	
+	//로그인 회원의 사진
+	public String getMemberPic(String memberId) {
+		return memberMapper.selectMemberPic(memberId);
+	}
 	public int getMemberPw(Member member) { 
 		// pw도 추가해주자(UUID 라이브러리 사용)
 		UUID uuid = UUID.randomUUID();
@@ -117,6 +121,7 @@ public class MemberService {
 		
 		Member member = new Member();
 		member.setMemberId(memberForm.getMemberId());
+		member.setMemberPw(memberForm.getMemberPw());
 		member.setMemberName(memberForm.getMemberName());
 		member.setMemberAddress(memberForm.getMemberAddress());
 		member.setMemberPhone(memberForm.getMemberPhone());
@@ -128,8 +133,8 @@ public class MemberService {
 		System.out.println(member.getMemberPhone());
 		System.out.println(member.getMemberEmail());
 		System.out.println(member.getMemberPic());
-		
-		File file = new File(path +"\\"+ memberPic);
+		int row = memberMapper.updateMember(member);
+		File file = new File(path + memberPic);
 		try {
 			mf.transferTo(file);
 		} catch (IllegalStateException e) {
@@ -139,25 +144,35 @@ public class MemberService {
 			throw new RuntimeException();
 		}
 		
-		return memberMapper.updateMemberInfo(member);
+		return row;
 	}
 	
 	public int addMember(MemberForm memberForm) {
 		// MemberForm -> member
 		// member -> 디스크에 물리적으로 저장
 		MultipartFile mf = memberForm.getMemberPic();
-		
+		System.out.println(mf + "/mf/memberService");
 		// 확장자가 필요함 xxx.jpg 
 		String originName = mf.getOriginalFilename();
+		System.out.println(originName + "/originName/memberSerivce");
 		//mf.getContentType().equals("image/PNG"); // 분기해서 특정 파일 확장자를 지정할 수도 있다.
-		System.out.println(originName);
-			
-		// 마지막 점의 위치
-		int lastDot = originName.lastIndexOf(".");
-		String extension = originName.substring(lastDot);
+		String memberPic = null;
+		if(originName.equals("")) {
+			System.out.println("originName = '' ");
+			memberPic = "default.jpg";
+		}else {
+			// 마지막 점의 위치
+			int lastDot = originName.lastIndexOf(".");
+			System.out.println(lastDot + "/lastDot/memberService");
+			String extension = originName.substring(lastDot);
+			memberPic = memberForm.getMemberId() + extension;
+			System.out.println(memberPic + "/memberPic/memberService");
+		}
+		
+		
+	
 		
 		// memberId + 확장자명
-		String memberPic = memberForm.getMemberId() + extension;
 		
 		// 1. db에 저장
 		Member member = new Member();
@@ -167,14 +182,17 @@ public class MemberService {
 		member.setMemberPhone(memberForm.getMemberPhone());
 		member.setMemberAddress(memberForm.getMemberAddress());
 		member.setMemberEmail(memberForm.getMemberEmail());
-		member.setMemberDate(member.getMemberDate());
 		member.setMemberPic(memberPic);
 		System.out.println(member + "<-- MemberService addMember member");
 		int row = memberMapper.insertMember(member);
+		System.out.println(row + "/row/memberService");
+		if(!originName.equals("")) {
+		File file = new File(path + memberPic);
+		System.out.println(path + "<---Path");
 		
 		// 2. 파일저장(static/upload)
 		
-		File file = new File(path + memberPic);
+		
 		try {
 			mf.transferTo(file);
 		} catch (IllegalStateException e) {
@@ -185,6 +203,7 @@ public class MemberService {
 			// Exception
 			// 1. 문법적으로 반드시 예외처리를 해야만 하는 경우
 			// 2. 예외처리를 하지 않아도 되는 경우 ex) RuntimeException
+		}
 		}
 		// 3. service 보내기
 		

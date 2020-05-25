@@ -200,7 +200,7 @@ $(document).ready(function(){
 	}
 	
 	});
-	$('#idBtn').click(function(){
+$('#idBtn').click(function(){
 		
 		$('#idForm').submit();
 	});
@@ -219,7 +219,7 @@ $(document).ready(function(){
             <input type="text" name="memberIdCk" id="memberIdCk" placeholder="IdCheck"  required>
        </div>
 		<div>
-			<button type="button" id="idBtn">중복체크</button><span th:text="${msg}"></span>
+			<input type="button" id="idBtn" value="중복체크"><span th:text="${msg}"></span>
 		</div>
 		</form>
 		<form method = "post" action = "/addMember" id = "myform" enctype="multipart/form-data">

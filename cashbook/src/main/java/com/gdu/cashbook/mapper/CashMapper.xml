@@ -4,6 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <!-- package에 이름과 xml의 이름을 적어 주소를 부른다 -->
 <mapper namespace="com.gdu.cashbook.mapper.CashMapper">
+	<insert id = "insertCash" parameterType = "com.gdu.cashbook.vo.Cash">
+	INSERT cash
+	(
+	member_id,
+	cash_date,
+	cash_kind,
+	category_name,
+	cash_price,
+	cash_place,
+	cash_memo
+	)
+	VALUES
+	(
+	#{memberId},
+	NOW(),
+	#{cashKind},
+	#{categoryName},
+	#{cashPrice},
+	#{cashPlace},
+	#{cashMemo}
+	)
+	</insert>
 	<select id="selectDayAndPriceList" parameterType = "java.util.Map" resultType = "com.gdu.cashbook.vo.DayAndPrice">
 		SELECT  DAY(cash_date) as day,
 				SUM(CASE WHEN cash_kind = '수입' THEN cash_price

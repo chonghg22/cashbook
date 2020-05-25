@@ -10,7 +10,6 @@ public class MemberForm {
 	private String memberAddress;
 	private String memberEmail;
 	private MultipartFile memberPic; //여러 개의 파일을 받고 싶을 땐 MultipartFile[], List<MultipartFile> 배열로 받는다.
-	
 	private String memberDate;
 	public String getMemberId() {
 		return memberId;

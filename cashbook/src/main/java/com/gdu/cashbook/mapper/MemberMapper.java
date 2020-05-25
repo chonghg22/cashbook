@@ -13,7 +13,7 @@ public interface MemberMapper {
 	public Member selectMemberByIdAndEmail(Member member); // 비밀번호 찾기
 	public String selectMemberIdBymember(Member member); // 아이디 찾기
 	public String updatePwCk(String memberPw); // 미완성
-	public int updateMemberInfo(Member member); // 회원정보 수정
+	public int updateMember(Member member); // 회원정보 수정
 	public Member updateMemberOne(LoginMember loginMember); // 특정 member의 db를 가지고 옴
 	public void deleteMember(LoginMember loginMember); // 회원탈퇴
 	public Member selectMemberOne(LoginMember loginMember); // 회원정보 
