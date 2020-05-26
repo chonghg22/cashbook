@@ -157,23 +157,26 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-
-	<!-- 
-	<h1 th:text="${}">가계부</h1> <- ${}변수값 기입할때 사용 
-	-->
 	<div class="box">
-        <h1>로그인</h1>
-        <form  method = "post" action="/login" id = "loginForm">
-            <input type="text" name="memberId" id="memberId" placeholder="아이디"  required>            
-            <input type="password" name = "memberPw" id="memberPw" placeholder="비밀번호" required>            
-            <input type="button" value="로그인" id = "btn">            
-            <div><a type = "button" href = "/index"  >처음으로</a></div>
-            <br>
-            <div><a th:href="@{/findMemberId}"  >아이디를 모르겠어요</a></div>
-            <div><a th:href="@{/findMemberPw}"  >비밀번호를 모르겠어요</a></div>
-            <div><span th:text="${msg}"></span></div>
-            
-        </form>
-        </div> 	
+	<h1>로그인</h1>
+		<form  method = "post" action="/login" id = "loginForm">
+			<input type="text" name="memberId" id="memberId" placeholder="아이디"  required>            
+			<input type="password" name = "memberPw" id="memberPw" placeholder="비밀번호" required>            
+			<input type="button" value="로그인" id = "btn">            
+			<div>
+				<a type = "button" href = "/index"  >처음으로</a>
+			</div>
+			<br>
+			<div>
+				<a th:href="@{/findMemberId}"  >아이디를 모르겠어요</a>
+			</div>
+			<div>
+				<a th:href="@{/findMemberPw}"  >비밀번호를 모르겠어요</a>
+			</div>
+			<div>
+				<span th:text="${msg}"></span>
+			</div>
+		</form>
+	</div> 	
 </body>
 </html>

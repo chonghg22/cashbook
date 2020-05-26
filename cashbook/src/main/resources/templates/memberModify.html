@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원정보 수정</title>
 <!-- jQuery library -->
 <link href="/css/registerForm.css" rel="stylesheet" media="all">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -12,55 +12,49 @@
 			$('#modifyForm').submit();			
 		});
 	});
-
 </script>
 </head> 
 <body>
-	<div class="login-box">
-        <h1>정보수정</h1>        
+	<div class="box">
+	<h1>정보수정</h1>        
 		<form id="modifyForm" th:action="@{/modifyMemberInfo}" method="post" enctype="multipart/form-data">
-		<div>
-      		<div class = "name">사진</div>
-      		<div><img th:src="@{${'/upload/'+member.memberPic}}"></div>      		
-           <input type="file" th:value="${member.memberPic}" name="memberPic" id = "memberPic">       		
-       </div>
-		<div>
-      		<div class = "name">아이디</div>      		
-           <input type="text" th:value="${member.memberId}" name="memberId" readonly="readonly">       		
-       </div>
-       <div>
-      		<div class = "name">이름</div>    		
-            <input type="text" name="memberName" id = "memberName">
-       	
-       </div>
-      
-       <div>
-      		<div class = "name">주소</div>      		
-           <input type="text" name="memberAddress" id="memberAddress">
-       		
-       </div>
-       <div>
-      		<div class = "name">전화번호</div>       		
-            <input type="text" name="memberPhone" id="memberPhone">
-       		
-       </div>
-       <div>
-      		<div class = "name">이메일</div>      		
-           <input type="text" name="memberEmail" id="memberEmail">
-       		
-       </div>
-       <div>
-      		<div class = "name">가입날짜</div>     		
-           <input type="text" th:value="${member.memberDate}" readonly = "readonly">
-       </div>
-       <div>
-      		<div class = "name">비밀번호</div>     		
-          <input type="password" name="memberPw" id="memberPw">
-       </div>
-       <div>
+			<div>
+				<div class = "name">사진</div>
+				<div><img th:src="@{${'/upload/'+member.memberPic}}"></div>      		
+				<input type="file" th:value="${member.memberPic}" name="memberPic" id = "memberPic">       		
+			</div>
+			<div>
+				<div class = "name">아이디</div>      		
+				<input type="text" th:value="${member.memberId}" name="memberId" readonly="readonly">       		
+			</div>
+			<div>
+				<div class = "name">이름</div>    		
+				<input type="text" name="memberName" id = "memberName">
+			</div>
+			<div>
+				<div class = "name">주소</div>      		
+				<input type="text" name="memberAddress" id="memberAddress">
+			</div>
+			<div>
+				<div class = "name">전화번호</div>       		
+				<input type="text" name="memberPhone" id="memberPhone">
+			</div>
+			<div>
+				<div class = "name">이메일</div>      		
+				<input type="text" name="memberEmail" id="memberEmail">
+			</div>
+			<div>
+				<div class = "name">가입날짜</div>     		
+				<input type="text" th:value="${member.memberDate}" readonly = "readonly">
+			</div>
+			<div>
+				<div class = "name">비밀번호</div>     		
+				<input type="password" name="memberPw" id="memberPw">
+			</div>
+			<div>
 			<button type="button" id="modiBtn">정보수정</button>
-		</div>            
-        </form>
-        </div> 	
+			</div>            
+		</form>
+	</div> 	
 </body>
 </html>

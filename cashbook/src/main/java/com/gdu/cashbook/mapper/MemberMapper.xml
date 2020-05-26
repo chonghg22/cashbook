@@ -46,13 +46,6 @@
 			member_pw = PASSWORD(#{memberPw})
 		WHERE member_id = #{memberId}
 	</update>
-	<!-- 미완성 -->
-	<select id="updatePwCk" resultType="String" parameterType="int">
-		SELECT
-			PASSWORD(member_pw)
-		FROM member
-		WHERE member_pw = PASSWORD(#{memberPw})
-	</select>
 	<!-- 회원수정을 위해 특정 memberId의 데이터를 받아오는 쿼리 -->
 	<select id="updateMemberOne" resultType="com.gdu.cashbook.vo.Member" parameterType="com.gdu.cashbook.vo.LoginMember">
 		SELECT
@@ -67,13 +60,15 @@
 		FROM member
 		WHERE member_id = #{memberId}
 	</select>
+	
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember" parameterType="com.gdu.cashbook.vo.LoginMember">
 		DELETE 
 		FROM member
-		WHERE member_id = ${memberId}
-		AND member_pw = PASSWORD(${memberPw})
+		WHERE member_id = #{memberId}
+		AND member_pw = PASSWORD(#{memberPw})
 	</delete>
+	
 	<!-- 회원정보 가지고 오는 쿼리 -->
 	<select id="selectMemberOne" resultType="com.gdu.cashbook.vo.Member" parameterType="com.gdu.cashbook.vo.LoginMember">
 		SELECT
@@ -87,6 +82,7 @@
 		FROM member
 		WHERE member_id = #{memberId}
 	</select>
+	
 	<!-- 중복체크를 위해 member_id를 가져오는 쿼리  -->
 	<select id="selectCheckMemberId" resultType="String" parameterType="String">
 		SELECT 
@@ -99,6 +95,7 @@
 		) t
 		WHERE member_id=#{memberIdCk}
 	</select>
+	
 	<!-- 로그인시 아이디 비밀번호 확인 -->
 	<select id="selectLoginMember" resultType="com.gdu.cashbook.vo.LoginMember" parameterType="com.gdu.cashbook.vo.LoginMember">
 	 	SELECT 
@@ -108,12 +105,14 @@
 	 	WHERE member_id = #{memberId}
 	 	AND member_pw = PASSWORD(#{memberPw})
 	</select>
+	
 	<!-- 회원 사진을 가지고 오는 쿼리 -->
 	 <select id="selectMemberPic" resultType="String" parameterType="String">
 	 	SELECT member_pic
 	 	FROM member
 	 	WHERE member_id = #{memberId}
 	 </select>
+	
 	<!-- 회원가입 쿼리 -->
 	<insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
 		INSERT INTO member

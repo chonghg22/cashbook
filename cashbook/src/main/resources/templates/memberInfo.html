@@ -7,10 +7,10 @@
 <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
 <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
 <link rel="stylesheet" href = "css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <style>
 .extable{
@@ -66,70 +66,104 @@ td.Infotable-Info{
 	text-align: center;
 	
 }
+img.pic{
+	width: 120px;
+	height: 60px;
+}
 </style>
 <body>
 	<div class="container-fleid">
 		<div class="row">
-			 <div class="col-sm-3">
-  				<div th:include="/include/menu::sidemenu"></div> 
+			<div class="col-sm-3">
+				<div th:include="/include/menu::sidemenu"></div> 
 			</div>
-			 <div class="col-sm-6">
-		<div class = "centered">
-        <h1 id = "Info">회원정보</h1>
-        </div>
-        <br>
-        <br>
-         <div><a type = "button" class=" out" th:href = "@{/removeMember(memberId=${loginMember.memberId})}"  >회원탈퇴</a></div>
-		<div class = "extable">
-        <table >
-      	<tr>
-      		<td class = "Infotable"><div class = "name">사용자 이미지</div></td>      		
-            <td class = "Infotable-Info" ><img th:src="@{${'/upload/'+member.memberPic}}"></td>      		
-       </tr> 
-	  
-        <tr>
-      		<td class = "Infotable">아이디</td>      		
-            <td class = "Infotable-Info"><span th:text = "${member.memberId}" ></span></td>
-       		<td><span id = "idHelper"></span></td>
-       </tr>  
-       <tr>
-      		<td class = "Infotable">사용자 이름</td>      		
-            <td class = "Infotable-Info"><span th:text = "${member.memberName}"></span></td>
-       		<td><span id = "nameHelper"></span></td>
-       </tr>
-       <tr>
-      		<td class = "Infotable">전화번호</td>     		
-            <td class = "Infotable-Info"><span th:text = "${member.memberPhone}" ></span></td>
-       		<td><span id = "phoneHelper"></span></td>
-       </tr>
-       <tr>
-      		<td class = "Infotable">주소</td>      		
-            <td class = "Infotable-Info"><span th:text = "${member.memberAddress}" ></span></td>
-       		<td><span id = "addressHelper"></span></td>
-       </tr>
-       <tr>
-      		<td class = "Infotable">이메일</td>   		
-            <td class = "Infotable-Info"><span th:text = "${member.memberEmail}" ></span></td>       		
-            <td><span id = "emailHelper"></span></td>
-       </tr>
-       <tr>
-      		<td class = "Infotable">가입날짜</td>     		
-            <td class = "Infotable-Info"><span th:text = "${member.memberDate}"></span></td>
-       		<td><span id = "emailHelper"></span></td>
-       </tr>
-       </table>
-        </div>             
-		
-		 <br>
-		 <div><a type = "button" class="btn btn-primary box1" th:href = "@{/modifyMemberInfo(memberId=${loginMember.memberId})}"  >정보수정</a></div>
-		 <br>
-		 <div><a type = "button" class="btn btn-primary box2" href = "/home"  >홈으로</a></div>
-		 </div>
-		 <div class="col-sm-3">
-  		
+			<div class="col-sm-6">
+				<div class = "centered">
+					<h1 id = "Info">회원정보</h1>
+				</div>
+				<br>
+				<br>
+				<div>
+					<a type = "button" class=" out" th:href = "@{/removeMember(memberId=${loginMember.memberId})}"  >회원탈퇴</a>
+				</div>
+				<div class = "extable">
+					<table >
+						<tr>
+							<td class = "Infotable">
+								<div class = "name">사용자 이미지</div>
+							</td>      		
+							<td class = "Infotable-Info" >
+								<img th:src="@{${'/upload/'+member.memberPic}}" class = "pic">
+							</td>      		
+						</tr> 
+						<tr>
+							<td class = "Infotable">아이디</td>      		
+							<td class = "Infotable-Info">
+								<span th:text = "${member.memberId}" ></span>
+							</td>
+							<td>
+								<span id = "idHelper"></span>
+							</td>
+						</tr>  
+						<tr>
+							<td class = "Infotable">사용자 이름</td>      		
+							<td class = "Infotable-Info">
+								<span th:text = "${member.memberName}"></span>
+							</td>
+							<td>
+								<span id = "nameHelper"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class = "Infotable">전화번호</td>     		
+							<td class = "Infotable-Info">
+								<span th:text = "${member.memberPhone}" ></span>
+							</td>
+							<td>
+								<span id = "phoneHelper"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class = "Infotable">주소</td>      		
+							<td class = "Infotable-Info">
+								<span th:text = "${member.memberAddress}" ></span>
+							</td>
+							<td>
+								<span id = "addressHelper"></span>
+							</td>
+						</tr>
+						<tr>
+							<td class = "Infotable">이메일</td>   		
+							<td class = "Infotable-Info">
+								<span th:text = "${member.memberEmail}" ></span>
+							</td>       		
+						<td>
+							<span id = "emailHelper"></span>
+						</td>
+						</tr>
+						<tr>
+							<td class = "Infotable">가입날짜</td>     		
+							<td class = "Infotable-Info">
+								<span th:text = "${member.memberDate}"></span>
+							</td>
+							<td>
+								<span id = "emailHelper"></span>
+							</td>
+						</tr>
+					</table>
+				</div>             
+				<br>
+				<div>
+					<a type = "button" class="btn btn-primary box1" th:href = "@{/modifyMemberInfo(memberId=${loginMember.memberId})}">정보수정</a>
+				</div>
+				<br>
+				<div>
+					<a type = "button" class="btn btn-primary box2" href = "/home"  >홈으로</a>
+				</div>
 			</div>
- 	</div>
- </div>
-	
+			<div class="col-sm-3">
+			</div>
+		</div>
+	</div>
 </body>
 </html> 

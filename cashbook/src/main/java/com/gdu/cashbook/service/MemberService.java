@@ -31,7 +31,7 @@ public class MemberService {
 	@Autowired
 	private JavaMailSender javaMailSender; //bean생성 -> @Component
 	
-	@Value("C:\\Users\\JJH\\Desktop\\maven.1590374288019\\cashbook\\src\\main\\resources\\static\\upload\\ ")
+	@Value("C:\\Users\\JJH\\Desktop\\maven.1590374288019\\cashbook\\src\\main\\resources\\static\\upload\\")
 	private String path;
 	//로그인 회원의 사진
 	public String getMemberPic(String memberId) {
@@ -78,9 +78,6 @@ public class MemberService {
 		memberid.setMemberId(loginMember.getMemberId());
 		memberidMapper.insertMemberid(memberid);
 		
-	}
-	public String modifyPwCk(String memberPw) {
-		return memberMapper.updatePwCk(memberPw);
 	}
 	public String getModifyMemberPic(LoginMember loginMember) {
 		return memberMapper.selectMemberPic(loginMember.getMemberId());

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>removeMember</title>
 <!-- jQuery library -->
 <link href="/css/registerForm.css" rel="stylesheet" media="all">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -15,17 +15,17 @@
 </script>
 </head>
 <body>
-	<div class="login-box">
-        <h1>회원탈퇴</h1>        
+	<div class="box">
+	<h1>회원탈퇴</h1>        
 		<form id="deleteForm" action="/removeMember" method="post">
 		<div>
-      		<div class = "name">비밀번호 입력</div>      		
-           <input type="password" name="memberPw">   		
-       </div>
-       <div>
-		<button id="deleteBtn" type = "button">삭제</button>
+			<div class = "name">비밀번호 입력</div>      		
+			<input type="password" name="memberPw">   		
+		</div>
+		<div>
+			<button id="deleteBtn" type = "button">삭제</button>
 		</div>            
-        </form>
-        </div> 	
+		</form>
+	</div> 	
 </body>
 </html>

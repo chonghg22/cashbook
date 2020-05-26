@@ -2,43 +2,88 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <!-- package에 이름과 xml의 이름을 적어 주소를 부른다 -->
 <mapper namespace="com.gdu.cashbook.mapper.CashMapper">
+	<!--가계부 수정시 cashNo값을 가져오는 쿼리 -->
+	<select id ="selectCashOne" parameterType = "int" resultType = "com.gdu.cashbook.vo.Cash">
+		SELECT 
+			cash_no as cashNo,
+			member_id as memberId,
+			cash_date as cashDate,
+			cash_kind as cashKind,
+			category_name as categoryName,
+			cash_price as cashPrice,
+			cash_place as cashPlace,
+			cash_memo as cashMemo
+			FROM cash
+		WHERE cash_no = #{cashNo}
+	</select>
+	
+	<!-- 가계부 수정 쿼리 -->
+	<update id = "updateCash" parameterType = "com.gdu.cashbook.vo.Cash">
+		UPDATE cash
+		SET
+			member_id = #{memberId},
+			cash_date = #{cashDate},
+			cash_kind = #{cashKind},
+			category_name = #{categoryName},
+			cash_price = #{cashPrice},
+			cash_place = #{cashPlace},
+			cash_memo = #{cashMemo}
+		WHERE cash_no = #{cashNo}
+	</update>
+	
+	<!-- 가계부 삭제 쿼리 -->
+	<delete id = "deleteCash" parameterType = "int">
+		DELETE 
+		FROM cash
+		WHERE cash_no = #{cashNo}
+	</delete>
+	
+	<!-- 카테고리 목록 가져오는 쿼리 -->
+	<select id = "selectCategoryName" parameterType = "com.gdu.cashbook.vo.Category" resultType = "com.gdu.cashbook.vo.Category">
+		SELECT
+			category_name as categoryName
+		FROM category
+	</select>
+	
+	<!-- 가계부 추가 쿼리 -->
 	<insert id = "insertCash" parameterType = "com.gdu.cashbook.vo.Cash">
-	INSERT cash
-	(
-	member_id,
-	cash_date,
-	cash_kind,
-	category_name,
-	cash_price,
-	cash_place,
-	cash_memo
-	)
+	INSERT INTO cash
+		(
+		member_id,
+		cash_date,
+		cash_kind,
+		category_name,
+		cash_price,
+		cash_place,
+		cash_memo
+		)
 	VALUES
-	(
-	#{memberId},
-	NOW(),
-	#{cashKind},
-	#{categoryName},
-	#{cashPrice},
-	#{cashPlace},
-	#{cashMemo}
-	)
+		(
+		#{memberId},
+		#{cashDate},
+		#{cashKind},
+		#{categoryName},
+		#{cashPrice},
+		#{cashPlace},
+		#{cashMemo}
+		)
 	</insert>
+	
+	<!-- 가계부에서 일자별로 수입 지출을 가져오는 쿼리 -->
 	<select id="selectDayAndPriceList" parameterType = "java.util.Map" resultType = "com.gdu.cashbook.vo.DayAndPrice">
 		SELECT  DAY(cash_date) as day,
 				SUM(CASE WHEN cash_kind = '수입' THEN cash_price
 					WHEN cash_kind = '지출' THEN -cash_price END) as price
 		FROM cash
 		WHERE member_id = #{memberId}
-		AND YEAR(cash_date) = #{year}
-		AND MONTH(cash_date) = ${month}
+			AND YEAR(cash_date) = #{year}
+			AND MONTH(cash_date) = ${month}
 		GROUP BY DAY (cash_date)
 	</select>
-	<select id = "selectCashListByToday"
-			parameterType = "com.gdu.cashbook.vo.Cash"
-			resultType = "com.gdu.cashbook.vo.Cash">
+	
+	<!-- 해당일자의 가계부 리스트를 가져오는 쿼리 -->
+	<select id = "selectCashListByToday" parameterType = "com.gdu.cashbook.vo.Cash" resultType = "com.gdu.cashbook.vo.Cash">
 		SELECT
 			cash_no as cashNo,
 			cash_kind as cashKind,
@@ -50,10 +95,10 @@
 		WHERE member_id = #{memberId}
 		AND cash_date = #{cashDate}
 		ORDER BY cash_no ASC		
-	
 	</select>
 	
-		<select id="selectCashKindSum" parameterType="com.gdu.cashbook.vo.Cash" resultType="int">
+	<!-- 특정일자의 가계부 합계를 가져오는 쿼리 -->	
+	<select id="selectCashKindSum" parameterType="com.gdu.cashbook.vo.Cash" resultType="int">
       SELECT
          (SELECT IFNULL(SUM(cash_price), 0)
          FROM cash

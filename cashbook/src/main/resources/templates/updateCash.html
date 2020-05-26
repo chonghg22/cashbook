@@ -8,49 +8,51 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
-		$('#cashBtn').click(function(){
-			$('#modifyForm').submit();			
-		});
+		$('#cashBtn').click(function(){		
+		$('#modifyForm').submit();	
+		
 	});
-
+	});
+		
 </script>
 </head> 
 <body>
-	<div class="login-box">
-	<h1>정보수정</h1>        
-		<form id="modifyForm" action="/addCash" method="post" >
+	<div class="box">
+		<h1>가계부수정</h1>        
+		<form id="modifyForm" action="/updateCash" method="post" >
 			<div>
-			<div class = "name">종류</div>    		
+				<div class = "name">종류</div>    		
 				<input type="radio" id="radio1" name="cashKind" value = "수입" checked/>
 				<label for="radio1">수입</label>
 				<input type="radio" id="radio2" name="cashKind" value = "지출" />
 				<label for="radio2">지출</label>       	
-			</div>
-			<div>  		
-				<input type="hidden" th:value="${loginMember.memberId}" name="memberId" readonly="readonly">      		
-			</div>
+			</div>			
+			<div>
+				<input type="hidden" name = "cashNo" th:value="${cash.cashNo}">  		
+				<input type="hidden" th:value="${loginMember.memberId}" name="memberId" readonly="readonly">     		
+			</div>			
 			<div>
 				<div class = "name">카테고리</div>  
 				<select name="categoryName" id = "categoryName" style = "vertical-align: middle; text-align-last: center">
-					<option>카테고리</option>
+					<option></option>
 					<option th:each="i : ${category}" th:value="${i.categoryName}" th:text="${i.categoryName}"></option>
 				</select>
-			</div>
+			</div>			
 			<div>
 				<div class = "name">금액</div>       		
-				<input type="text" name="cashPrice">
-			</div>
+				<input type="text" name="cashPrice" th:value="${cash.cashPrice}" id = "cashPrice">
+			</div>			
 			<div>
 				<div class = "name">장소</div>      		
-				<input type="text" name="cashPlace">
-			</div>
+				<input type="text" name="cashPlace" th:value="${cash.cashPlace}" id = "cashPlace">
+			</div>			
 			<div>
 				<div class = "name">메모</div>     		
-				<input type="text" name = "cashMemo">
-			</div>
+				<input type="text" name = "cashMemo" th:value="${cash.cashMemo}" id = "cashMemo">
+			</div>			
 			<div>
 				<div class = "name">날짜</div>  
-				<input type = "date" name="cashDate">
+				<input type = "date" name="cashDate" th:value="${cash.cashDate}" >
 			</div>
 			<div>
 				<button type="button" id="cashBtn">작성완료</button>

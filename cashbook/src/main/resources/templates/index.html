@@ -111,38 +111,38 @@ login css end
 </head>
 <body>
 	<div class="box">
-        <h1>가계부</h1>
-        <h1>시작하기</h1> 
-        <br> 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>        
-        <!-- 로그인이 되어있으면 로그아웃 버튼을 나타낸다. -->   		      
-        <div th:if="${session.loginMember !=null}">
-        	<a href="/home" type = "button" class = "btn">홈으로</a>
-        </div>
-        <br> 
-        <br> 
-        <br>
-        <br> 
-        <div th:if="${session.loginMember !=null}">
-        	<a href="/logout" type = "button" class = "btn">로그아웃</a>
-        </div>
-        <!-- 로그인이 되어있지 않으면 로그인과 회원가입 버튼을 나타낸다. -->
-        <div th:if="${session.loginMember ==null}">
-        	<a href="/login"  type = "button" class = "btn">로그인</a>
-        </div>
-        <br> 
-        <br> 
-        <br>
-        <br>      
+		<h1>가계부</h1>
+		<h1>시작하기</h1> 
+	<br> 
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>        
+		<!-- 로그인이 되어있으면 로그아웃 버튼을 나타낸다. -->   		      
+		<div th:if="${session.loginMember !=null}">
+			<a href="/home" type = "button" class = "btn">홈으로</a>
+		</div>
+	<br> 
+	<br> 
+	<br>
+	<br> 
+		<div th:if="${session.loginMember !=null}">
+			<a href="/logout" type = "button" class = "btn">로그아웃</a>
+		</div>
+		<!-- 로그인이 되어있지 않으면 로그인과 회원가입 버튼을 나타낸다. -->
+		<div th:if="${session.loginMember ==null}">
+			<a href="/login"  type = "button" class = "btn">로그인</a>
+		</div>
+	<br> 
+	<br> 
+	<br>
+	<br>      
 		<div th:if="${session.loginMember ==null}">
 			<a href="/addMember" type = "button"  class = "btn">회원가입</a>
 		</div>
-		<br>	
+	<br>	
 		<div id="copyRight1">본 콘텐츠의 저작권은 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적 책임을 질 수 있습니다.</div>
 		<div id="copyRight2">Copyright © JWsoft Corp. All Rights Reserved.</div>
 	</div>	
