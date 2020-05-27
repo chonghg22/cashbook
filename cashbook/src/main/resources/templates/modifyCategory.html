@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>modify Category</title>
 <!-- jQuery library -->
 <link href="/css/registerForm.css" rel="stylesheet" media="all">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$('#categoryBtn').click(function(){
-			$('#addForm').submit();			
+			$('#modifyForm').submit();			
 		});
 	});
 
@@ -18,7 +18,7 @@
 <body>
 	<div class="box">
 	<h1>정보수정</h1>        
-		<form id="addForm" th:action="@{/modifyCategory}" method="post" >			
+		<form id="modifyForm" th:action="@{/modifyCategory}" method="post" >			
 			<div>
 				<div class = "name">카테고리</div>
 				<input type ="hidden" name = "categoryNo" th:value = "${category.categoryNo}">       		

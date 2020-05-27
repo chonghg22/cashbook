@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Update Cash</title>
 <!-- jQuery library -->
 <link href="/css/registerForm.css" rel="stylesheet" media="all">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$('#cashBtn').click(function(){		
-		$('#modifyForm').submit();	
+		$('#updateForm').submit();	
 		
 	});
 	});
@@ -19,7 +19,7 @@
 <body>
 	<div class="box">
 		<h1>가계부수정</h1>        
-		<form id="modifyForm" action="/updateCash" method="post" >
+		<form id="updateForm" action="/updateCash" method="post" >
 			<div>
 				<div class = "name">종류</div>    		
 				<input type="radio" id="radio1" name="cashKind" value = "수입" checked/>
