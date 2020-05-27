@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.cashbook.mapper.CategoryMapper">
+		<!-- 카테고리 목록 가져오는 쿼리 -->
+	<select id = "selectCategoryName" parameterType = "com.gdu.cashbook.vo.Category" resultType = "com.gdu.cashbook.vo.Category">
+		SELECT
+			category_no as categoryNo,
+			category_name as categoryName
+		FROM category
+		ORDER BY category_no asc		
+	</select>
+	<select id = "selectCategoryOne" parameterType = "int" resultType = "com.gdu.cashbook.vo.Category">
+		SELECT
+			category_no as categoryNo,
+			category_name as categoryName
+		FROM category
+		WHERE category_no = #{categoryNo}
+	</select>
+	<insert id ="addCategory" parameterType = "com.gdu.cashbook.vo.Category">
+		INSERT INTO category(
+		category_name
+		)
+		VALUES
+		(
+		#{categoryName}
+		)
+	</insert>
+	<update id = "modifyCategory" parameterType = "com.gdu.cashbook.vo.Category">
+		UPDATE category
+		SET
+		category_name = #{categoryName}
+		WHERE category_no = #{categoryNo}
+		
+	</update>
+	<delete id = "deleteCateogry" parameterType = "int">
+	DELETE 
+	FROM category
+	WHERE category_no = #{categoryNo}
+	</delete>
+</mapper>

@@ -1,11 +1,12 @@
 package com.gdu.cashbook.mapper;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.cashbook.vo.LoginMember;
 import com.gdu.cashbook.vo.Member;
-import com.gdu.cashbook.vo.MemberForm;
 @Mapper
 public interface MemberMapper {
 	public String selectMemberPic(String memberId);					//이미지 삭제를 위해서 이미지 값을 받아 옴
@@ -19,4 +20,6 @@ public interface MemberMapper {
 	public String selectCheckMemberId(String memberIdCk);			// 아이디 중복 체크
 	public LoginMember selectLoginMember(LoginMember loginMember);  // 로그인 아이디 비밀번호
 	public int insertMember(Member member); 						// 회원가입
+	public void updateAdmin(LoginMember loginMember);
+	public List<Member> selectMember(Member member);
 }

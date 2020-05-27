@@ -63,5 +63,6 @@ public class Member { // table의 도메인(스펙, 범위) VO, DTO
 				+ ", memberAddress=" + memberAddress + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail
 				+ ", memberDate=" + memberDate + ", memberPic=" + memberPic + "]";
 	}
+	
 
 }

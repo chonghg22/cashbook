@@ -3,6 +3,7 @@ package com.gdu.cashbook.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gdu.cashbook.mapper.AdminMapper;
 import com.gdu.cashbook.mapper.MemberMapper;
 import com.gdu.cashbook.mapper.MemberidMapper;
+import com.gdu.cashbook.vo.Admin;
 import com.gdu.cashbook.vo.LoginMember;
 import com.gdu.cashbook.vo.Member;
 import com.gdu.cashbook.vo.MemberForm;
@@ -33,6 +36,10 @@ public class MemberService {
 	
 	@Value("C:\\Users\\JJH\\Desktop\\maven.1590374288019\\cashbook\\src\\main\\resources\\static\\upload\\")
 	private String path;
+	
+	public List<Member> getselectMember(Member member){
+		return memberMapper.selectMember(member);
+	}
 	//로그인 회원의 사진
 	public String getMemberPic(String memberId) {
 		return memberMapper.selectMemberPic(memberId);
@@ -61,6 +68,7 @@ public class MemberService {
 	public String getMemberIdByMember(Member member) {
 		return memberMapper.selectMemberIdBymember(member);
 	}
+	
 	public void removeMember(LoginMember loginMember) {
 		// @Transactional 이 여기에 있어도 괜찮다.
 		// 1. 회원 이미지 삭제

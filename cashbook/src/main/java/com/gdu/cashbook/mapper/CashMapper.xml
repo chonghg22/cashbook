@@ -39,12 +39,7 @@
 		WHERE cash_no = #{cashNo}
 	</delete>
 	
-	<!-- 카테고리 목록 가져오는 쿼리 -->
-	<select id = "selectCategoryName" parameterType = "com.gdu.cashbook.vo.Category" resultType = "com.gdu.cashbook.vo.Category">
-		SELECT
-			category_name as categoryName
-		FROM category
-	</select>
+
 	
 	<!-- 가계부 추가 쿼리 -->
 	<insert id = "insertCash" parameterType = "com.gdu.cashbook.vo.Cash">

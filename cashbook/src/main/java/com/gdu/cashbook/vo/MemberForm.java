@@ -47,21 +47,21 @@ public class MemberForm {
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
-	public String getMemberDate() {
-		return memberDate;
-	}
-	public void setMemberDate(String memberDate) {
-		this.memberDate = memberDate;
-	}
 	public MultipartFile getMemberPic() {
 		return memberPic;
 	}
 	public void setMemberPic(MultipartFile memberPic) {
 		this.memberPic = memberPic;
 	}
+	public String getMemberDate() {
+		return memberDate;
+	}
+	public void setMemberDate(String memberDate) {
+		this.memberDate = memberDate;
+	}
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", memberPw=" + memberPw + ", memberName=" + memberName
+		return "MemberForm [memberId=" + memberId + ", memberPw=" + memberPw + ", memberName=" + memberName
 				+ ", memberPhone=" + memberPhone + ", memberAddress=" + memberAddress + ", memberEmail=" + memberEmail
 				+ ", memberPic=" + memberPic + ", memberDate=" + memberDate + "]";
 	}

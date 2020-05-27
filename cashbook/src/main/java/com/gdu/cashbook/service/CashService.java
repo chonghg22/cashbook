@@ -28,9 +28,6 @@ public class CashService {
 	public int deleteCash(Cash cash) {				
 		return cashMapper.deleteCash(cash);
 	}
-	public List<Category> selectCategoryName(){
-		return cashMapper.selectCategoryName();
-	}
 	public int addCash(Cash cash) {
 		return cashMapper.insertCash(cash);
 	}

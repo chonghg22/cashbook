@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gdu.cashbook.service.CashService;
+import com.gdu.cashbook.service.CategoryService;
 import com.gdu.cashbook.service.MemberService;
 import com.gdu.cashbook.vo.Cash;
 import com.gdu.cashbook.vo.Category;
@@ -30,7 +31,7 @@ import com.gdu.cashbook.vo.Member;
 public class CashController {
 	@Autowired
 	private CashService cashService;
-	private MemberService memberService;
+	private CategoryService categoryService;
 	//updateCash Form
 	@GetMapping("/updateCash")
 	public String updateCash(HttpSession session, Model model, @RequestParam(value="cashNo", required = false) int cashNo) {
@@ -45,7 +46,7 @@ public class CashController {
 		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
 			System.out.println(loginMember +"/loginMember/updateCash/Controller/Get");
 		model.addAttribute("loginMember", loginMember);
-		List<Category> category = cashService.selectCategoryName();
+		List<Category> category = categoryService.selectCategoryName();
 			System.out.println(category + "/category/updateCash/Controller/Get");
 		model.addAttribute("category", category);		
 		return "updateCash";
@@ -79,7 +80,7 @@ public class CashController {
 	public String addCash(Model model, HttpSession session) {
 		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
 			System.out.println(loginMember + "/loginMember/addCash/Controller/Get");
-		List<Category> category = cashService.selectCategoryName();
+		List<Category> category = categoryService.selectCategoryName();
 			System.out.println(category + "/category/addCash/Controller/Get");
 		model.addAttribute("category", category);
 		if(session.getAttribute("loginMember") == null) {
