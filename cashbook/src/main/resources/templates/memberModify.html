@@ -13,6 +13,12 @@
 		});
 	});
 </script>
+<style>
+img.pic{
+	width: 120px;
+	height: 60px;
+}
+</style>
 </head> 
 <body>
 	<div class="box">
@@ -20,8 +26,8 @@
 		<form id="modifyForm" th:action="@{/modifyMemberInfo}" method="post" enctype="multipart/form-data">
 			<div>
 				<div class = "name">사진</div>
-				<div><img th:src="@{${'/upload/'+member.memberPic}}"></div>      		
-				<input type="file" th:value="${member.memberPic}" name="memberPic" id = "memberPic">       		
+				<div><img th:src="@{${'/upload/'+member.memberPic}}" class = "pic"></div>      		
+				<input type="file" th:value="${member.memberPic}" name="memberPic" id = "memberPic" >       		
 			</div>
 			<div>
 				<div class = "name">아이디</div>      		
