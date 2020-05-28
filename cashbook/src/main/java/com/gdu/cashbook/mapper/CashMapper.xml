@@ -38,7 +38,13 @@
 		FROM cash
 		WHERE cash_no = #{cashNo}
 	</delete>
-	
+	<select id = "selectCategoryName" parameterType = "com.gdu.cashbook.vo.Category" resultType = "com.gdu.cashbook.vo.Category">
+		SELECT
+			category_no as categoryNo,
+			category_name as categoryName
+		FROM category
+		ORDER BY category_no asc		
+	</select>
 
 	
 	<!-- 가계부 추가 쿼리 -->

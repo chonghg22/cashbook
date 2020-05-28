@@ -25,6 +25,9 @@ public class CashService {
 	public Cash selectCashOne(int cashNo) {			//CashController에서 받은 cashNo 매개변수값을 cashMapper의 selectCashOne 메서드로 보내고 그 결과값을 다시 Cash로 담는다.
 		return cashMapper.selectCashOne(cashNo);
 	}
+	public List<Category> selectCategoryName(){
+		return cashMapper.selectCategoryName();
+	}
 	public int deleteCash(Cash cash) {				
 		return cashMapper.deleteCash(cash);
 	}

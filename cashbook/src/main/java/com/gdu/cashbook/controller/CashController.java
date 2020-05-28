@@ -46,7 +46,7 @@ public class CashController {
 		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
 			System.out.println(loginMember +"/loginMember/updateCash/Controller/Get");
 		model.addAttribute("loginMember", loginMember);
-		List<Category> category = categoryService.selectCategoryName();
+		List<Category> category = cashService.selectCategoryName();
 			System.out.println(category + "/category/updateCash/Controller/Get");
 		model.addAttribute("category", category);		
 		return "updateCash";
@@ -80,7 +80,7 @@ public class CashController {
 	public String addCash(Model model, HttpSession session) {
 		LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
 			System.out.println(loginMember + "/loginMember/addCash/Controller/Get");
-		List<Category> category = categoryService.selectCategoryName();
+		List<Category> category = cashService.selectCategoryName();
 			System.out.println(category + "/category/addCash/Controller/Get");
 		model.addAttribute("category", category);
 		if(session.getAttribute("loginMember") == null) {
