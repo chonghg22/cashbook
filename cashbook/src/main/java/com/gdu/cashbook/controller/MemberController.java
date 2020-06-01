@@ -171,7 +171,7 @@ public class MemberController {
 			return "login";																//로그인 페이지를 불러온다.
 		} else {																		//그게 아니면
 			session.setAttribute("loginMember", returnLoginMember);						//로그인된 값을 loginMember 변수에 담는다.
-			return "redirect:/home";													//home으로 복귀한다.
+			return "redirect:/index";													//home으로 복귀한다.
 		}	
 	}
 	

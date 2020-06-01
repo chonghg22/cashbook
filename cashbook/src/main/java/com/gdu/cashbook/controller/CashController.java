@@ -154,6 +154,7 @@ public class CashController {
 	//getCashListByDatye Form
 	@GetMapping("/getCashListByDate")
 	public String getCashListByDate(HttpSession session, Model model, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {
+		System.out.println(day + "<---day");
 		if(day == null) {
 			day = LocalDate.now(); 
 		}

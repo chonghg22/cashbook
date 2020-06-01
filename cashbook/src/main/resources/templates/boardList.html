@@ -57,50 +57,26 @@ a.insert{
 				<div th:include="/include/menu::sidemenu"></div> 
 			</div>
 			<div class="col-sm-6">
+			
 				<div class = "extable">
-				<div class = "day" th:text = "${day}"></div>
+				<h1 style = "text-align: center;">게시판</h1>
 				<div>
-					<a class = "left btn btn-primary" th:href="@{/getCashListByDate(day=${day.plusDays(-1)})}">이전</a>	
-					<a class = "right btn btn-primary" th:href="@{/getCashListByDate(day=${day.plusDays(+1)})}">다음</a>
-					<a class = "insert btn btn-primary" th:href = "@{/addCash}">추가</a>
+					<a class = "left btn btn-primary" href="#">이전</a>	
+					<a class = "right btn btn-primary" href="#">다음</a>
+					<a class = "insert btn btn-primary" href = "#">추가</a>
 				</div>
 				<table class = "tableset">
 					<thead>
-						<tr >
+						<tr>
 							<th class = "dateTitle">No</th>
-							<th class = "dateTitle">카테고리</th>
-							<th class = "dateTitle">수입</th>
-							<th class = "dateTitle">지출</th>
-							<th class = "dateTitle">장소</th>
-							<th class = "dateTitle">메모</th>
-							<th class = "dateTitle">삭제</th>
-							<th class = "dateTitle">수정</th>	
+							<th class = "dateTitle">아이디</th>
+							<th class = "dateTitle">제목</th>
+							<th class = "dateTitle">날짜</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr th:each="cash, index : ${cashList}">
-							<td class = "content" th:text = "${index.index}+1"></td>
-							<td class = "content"  th:text = "${cash.categoryName}"></td>
-							<!-- thymeleaf if~else문 : if/unless -->
-							<td class = "content"  th:if="${cash.cashKind} == '수입'" th:text = "${'+' + cash.cashPrice + '원'}"></td>
-							<td class = "content"  th:unless="${cash.cashKind}=='수입'"></td>
-							<!-- 삼황연산자 -->
-							<td class = "content"  th:if="${cash.cashKind} == '지출'" th:text = "${'-' + cash.cashPrice + '원'}"></td>
-							<td class = "content"  th:unless="${cash.cashKind} == '지출'"></td>
-							<td class = "content"  th:text = "${cash.cashPlace}"></td>
-							<td class = "content"  th:text = "${cash.cashMemo}"></td>
-							<td class = "content" >
-								<a th:href = "@{/deleteCash(cashNo=${cash.cashNo})}">삭제</a>
-							</td>
-							<td class = "content" >
-								<a th:href = "@{/updateCash(cashNo=${cash.cashNo})}">수정</a>
-							</td>
-						</tr>
+					<tbody>						
 					</tbody>
-				</table>
-				<div>(수입+지출)합계:
-					<span th:text="${cashKindSum}"></span>
-				</div>		
+				</table>			
 			</div>			
 			<div class="col-sm-3">			
 			</div>

@@ -24,25 +24,45 @@
 
 	<div id="sidebarMenu">
 		<ul class="sidebarMenuInner">
-		<li>
-			<a href="#"><span th:text="${session.loginMember.memberId}"></span> 님 안녕하세요.</a>
+			<li>
+				<a th:href="@{/home}" target="_blank">Home</a>
+			</li>
+		</ul>
+		<div th:if="${session.loginMember !=null}">
+		<ul class="sidebarMenuInner">
+		<li>			
+			<a href="#"><span th:text="${session.loginMember.memberId}+'님'"></span>안녕하세요.</a>
 		</li>
-		<li>
-			<a th:href="@{/home}" target="_blank">Home</a>
-		</li>
-		<li>
+		<li>		
 			<a th:href="@{/memberInfo}" target="_blank">회원정보</a>
 		</li>
-		<li>
+		<li>			
 			<a th:href="@{/getCashListByDate}" target="_blank">일별 가계부</a>
 		</li>
+		<li>			
+			<a th:href="@{/getCashListByMonth}" target="_blank">월별 가계부</a>			
+		</li>
 		<li>
-			<a th:href="@{/getCashListByMonth}" target="_blank">월별 가계부</a>
+			<a th:href = "@{/boardList}" target="_blank">게시판</a>
 		</li>
 		<li>
 			<a th:href="@{/logout}" target="_blank">로그아웃</a>
 		</li>
 		</ul>
+		</div>
+		<div th:if="${session.loginMember ==null}">
+		<ul class="sidebarMenuInner">		
+		<li>		
+			<a href="/login"  type = "button" class = "btn">로그인</a>		
+		</li>
+		<li>
+			<a href="/addMember" type = "button"  class = "btn">회원가입</a>
+		</li>		
+		<li>
+			<a th:href = "@{/boardList}" target="_blank">게시판</a>
+		</li>		
+		</ul>
+		</div>
 	</div>
 </div>
 </body>
