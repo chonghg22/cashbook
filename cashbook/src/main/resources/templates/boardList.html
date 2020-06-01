@@ -74,7 +74,15 @@ a.insert{
 							<th class = "dateTitle">날짜</th>
 						</tr>
 					</thead>
-					<tbody>						
+					<tbody>
+						<tr th:each="board, index : ${list} ">
+							<td class = "content" th:text = "${board.boardNo}"></td>
+							<td class = "content" th:text = "${board.memberId}"></td>
+							<td class = "content">
+								<a href = "#" th:text = "${board.boardTitle}"></a>
+							</td>
+							<td class = "content" th:text = "${board.boardDate}"></td>							
+						</tr>						
 					</tbody>
 				</table>			
 			</div>			

@@ -4,7 +4,7 @@ public class Board {
 	private int boardNo;
 	private String memberId;
 	private String boardTitle;
-	private String boardContents;
+	private String boardContent;
 	private	String boardComment;
 	private String boardDate;
 	public int getBoardNo() {
@@ -25,11 +25,11 @@ public class Board {
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
 	}
-	public String getBoardContents() {
-		return boardContents;
+	public String getBoardContent() {
+		return boardContent;
 	}
-	public void setBoardContents(String boardContents) {
-		this.boardContents = boardContents;
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
 	}
 	public String getBoardComment() {
 		return boardComment;
@@ -45,9 +45,9 @@ public class Board {
 	}
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", memberId=" + memberId + ", boardTitle=" + boardTitle
-				+ ", boardContents=" + boardContents + ", boardComment=" + boardComment + ", boardDate=" + boardDate
-				+ "]";
+		return "Board [boardNo=" + boardNo + ", memberId=" + memberId + ", boardTitle=" + boardTitle + ", boardContent="
+				+ boardContent + ", boardComment=" + boardComment + ", boardDate=" + boardDate + "]";
 	}
+	
 	
 }
