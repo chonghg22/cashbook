@@ -14,13 +14,13 @@
 			cash_price as cashPrice,
 			cash_place as cashPlace,
 			cash_memo as cashMemo
-			FROM cash
+			FROM cashbook_cash
 		WHERE cash_no = #{cashNo}
 	</select>
 	
 	<!-- 가계부 수정 쿼리 -->
 	<update id = "updateCash" parameterType = "com.gdu.cashbook.vo.Cash">
-		UPDATE cash
+		UPDATE cashbook_cash
 		SET
 			member_id = #{memberId},
 			cash_date = #{cashDate},
@@ -35,21 +35,21 @@
 	<!-- 가계부 삭제 쿼리 -->
 	<delete id = "deleteCash" parameterType = "int">
 		DELETE 
-		FROM cash
+		FROM cashbook_cash
 		WHERE cash_no = #{cashNo}
 	</delete>
 	<select id = "selectCategoryName" parameterType = "com.gdu.cashbook.vo.Category" resultType = "com.gdu.cashbook.vo.Category">
 		SELECT
 			category_no as categoryNo,
 			category_name as categoryName
-		FROM category
+		FROM cashbook_category
 		ORDER BY category_no asc		
 	</select>
 
 	
 	<!-- 가계부 추가 쿼리 -->
 	<insert id = "insertCash" parameterType = "com.gdu.cashbook.vo.Cash">
-	INSERT INTO cash
+	INSERT INTO cashbook_cash
 		(
 		member_id,
 		cash_date,
@@ -76,7 +76,7 @@
 		SELECT  DAY(cash_date) as day,
 				SUM(CASE WHEN cash_kind = '수입' THEN cash_price
 					WHEN cash_kind = '지출' THEN -cash_price END) as price
-		FROM cash
+		FROM cashbook_cash
 		WHERE member_id = #{memberId}
 			AND YEAR(cash_date) = #{year}
 			AND MONTH(cash_date) = ${month}
@@ -92,7 +92,7 @@
 			cash_price as cashPrice,
 			cash_place as cashPlace,
 			cash_memo as cashMemo
-		FROM cash
+		FROM cashbook_cash
 		WHERE member_id = #{memberId}
 		AND cash_date = #{cashDate}
 		ORDER BY cash_no ASC		
@@ -102,11 +102,11 @@
 	<select id="selectCashKindSum" parameterType="com.gdu.cashbook.vo.Cash" resultType="int">
       SELECT
          (SELECT IFNULL(SUM(cash_price), 0)
-         FROM cash
+         FROM cashbook_cash
          WHERE member_id= #{memberId} AND cash_kind = '수입' AND cash_date = #{cashDate})
          -
          (SELECT IFNULL(SUM(cash_price), 0)
-         FROM cash
+         FROM cashbook_cash
          WHERE member_id= #{memberId} AND cash_kind = '지출' AND cash_date = #{cashDate})
       FROM dual   
    </select>

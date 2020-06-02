@@ -13,12 +13,12 @@
 		board_content boardContent,
 		board_comment boardComment,
 		board_date boardDate
-		FROM board
+		FROM cashbook_board
 	</select>
 	
 	<insert id = "insertBoard" parameterType = "com.gdu.cashbook.vo.Board">
 	INSERT INTO
-	board(
+	cashbook_board(
 	member_id,
 	board_title,
 	board_content,

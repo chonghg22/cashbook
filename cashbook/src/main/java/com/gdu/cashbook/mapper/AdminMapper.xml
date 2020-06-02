@@ -6,7 +6,7 @@
 	<!--가계부 수정시 cashNo값을 가져오는 쿼리 -->
 	<insert id = "insertAdmin" parameterType = "com.gdu.cashbook.vo.Admin">
 	INSERT 
-	INTO admin
+	INTO cashbook_admin
 	(
 	admin_id
 	)
@@ -18,7 +18,7 @@
 	<select id = "selectLoginAdmin" resultType="String" parameterType="com.gdu.cashbook.vo.Admin">
 		SELECT
 			admin_id		
-		FROM admin
+		FROM cashbook_admin
 		WHERE admin_id=(
 		SELECT 
 	 		member_id
