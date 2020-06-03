@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.gdu.cashbook.vo.Cash;
 import com.gdu.cashbook.vo.Category;
 import com.gdu.cashbook.vo.DayAndPrice;
+import com.gdu.cashbook.vo.MonthAndPrice;
 @Mapper
 public interface CashMapper {
 	public List<DayAndPrice> selectDayAndPriceList(Map<String, Object> map );	//특정날짜와금액을 가져옴
@@ -18,4 +19,6 @@ public interface CashMapper {
 	public int deleteCash(Cash cash);											//가계부 삭제
 	public int updateCash(Cash cash);											//가계부 수정
 	public Cash selectCashOne(int cashNo); 										//cashNo값을 기준으로 그에 해당하는 리스트 가져옴
+	public List<MonthAndPrice> selectImportmonthAndPriceList(Map<String, Object> month);//월별 합계
+	public List<MonthAndPrice> selectExpensemonthAndPriceList(Map<String, Object> month);
 }

@@ -26,12 +26,16 @@ import com.gdu.cashbook.vo.Category;
 import com.gdu.cashbook.vo.DayAndPrice;
 import com.gdu.cashbook.vo.LoginMember;
 import com.gdu.cashbook.vo.Member;
+import com.gdu.cashbook.vo.MonthAndPrice;
 
 @Controller
 public class CashController {
 	@Autowired
 	private CashService cashService;
 	private CategoryService categoryService;
+	
+	
+	
 	//updateCash Form
 	@GetMapping("/updateCash")
 	public String updateCash(HttpSession session, Model model, @RequestParam(value="cashNo", required = false) int cashNo) {
@@ -99,7 +103,33 @@ public class CashController {
 		cashService.addCash(cash);
 		return "redirect:/getCashListByDate?day ="+cash.getCashDate();
 	}
-	
+	@GetMapping("/getCashListByMonthCompare")
+	public String getCashListByMonthCompare(HttpSession session, Model model, Cash cash, LocalDate day) {
+		Calendar mDay = Calendar.getInstance();
+		if(session.getAttribute("loginMember")==null) {
+			return "redirect:/"; 
+		}
+		if(day == null) {
+			day = LocalDate.now();
+		}else {
+			mDay.set(day.getYear(), day.getMonthValue()-1, day.getDayOfMonth());
+		}
+		String memberId = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
+			System.out.println(memberId);
+		int year = mDay.get(Calendar.YEAR);
+			System.out.println(year);
+		List<MonthAndPrice> importmonthAndPriceList = cashService.selectImportmonthAndPriceList(memberId, year);
+		for(MonthAndPrice mp : importmonthAndPriceList) {
+			System.out.println( mp);
+		}
+		model.addAttribute("importmonthAndPriceList", importmonthAndPriceList);
+		List<MonthAndPrice> expensemonthAndPriceList = cashService.selectExpensemonthAndPriceList(memberId, year);
+		for(MonthAndPrice ep : expensemonthAndPriceList) {
+			System.out.println(ep);
+		}
+		model.addAttribute("expensemonthAndPriceList", expensemonthAndPriceList);
+		return "getCashListByMonthCompare";
+	}
 	//getCashListByMonth Form
 	@GetMapping("/getCashListByMonth")
 	public String getCashListByMonth(HttpSession session, Model model, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate day) {		 

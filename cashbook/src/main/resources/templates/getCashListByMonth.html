@@ -70,7 +70,8 @@
 				<div class = "aClick">
 				<h3 class = "gd-text" th:text="${#temporals.format(day, 'yyyy-MM')}" ></h3>				
 					<a class="btn btn-primary" th:href="@{/getCashListByMonth(day=${day.plusMonths(-1)})}">이전</a>
-					<a class="btn btn-primary" th:href="@{/getCashListByMonth(day=${day.plusMonths(+1)})}">다음</a>				
+					<a class="btn btn-primary" th:href="@{/getCashListByMonth(day=${day.plusMonths(+1)})}">다음</a>
+					<a class="btn btn-success" th:href = "@{/getCashListByMonthCompare}">월별 비교</a>			
 				</div>
 				<!--  <h3 th:text="${lastDay+'일'}"></h3> 일자를 나타냄--> 
 				<div class = "gd-left gd-clear gd-title">일</div>

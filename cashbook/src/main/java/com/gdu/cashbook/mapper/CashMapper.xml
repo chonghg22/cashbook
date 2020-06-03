@@ -79,7 +79,7 @@
 		FROM cashbook_cash
 		WHERE member_id = #{memberId}
 			AND YEAR(cash_date) = #{year}
-			AND MONTH(cash_date) = ${month}
+			AND MONTH(cash_date) = #{month}
 		GROUP BY DAY (cash_date)
 	</select>
 	
@@ -97,7 +97,7 @@
 		AND cash_date = #{cashDate}
 		ORDER BY cash_no ASC		
 	</select>
-	
+
 	<!-- 특정일자의 가계부 합계를 가져오는 쿼리 -->	
 	<select id="selectCashKindSum" parameterType="com.gdu.cashbook.vo.Cash" resultType="int">
       SELECT
@@ -109,6 +109,24 @@
          FROM cashbook_cash
          WHERE member_id= #{memberId} AND cash_kind = '지출' AND cash_date = #{cashDate})
       FROM dual   
+   </select>
+   <!-- 월별 수입/지출 리스트 -->
+   <select id = "selectImportmonthAndPriceList" parameterType = "java.util.Map" resultType = "com.gdu.cashbook.vo.MonthAndPrice">
+   		 SELECT MONTH(cash_date) AS month, 
+				SUM(case when cash_kind = '수입' then cash_price
+				END) AS price
+		FROM cashbook_cash
+		WHERE member_id = #{memberId}
+		AND YEAR(cash_date) = #{year}
+		GROUP BY MONTH(cash_date) 
+   </select>
+   <select id = "selectExpensemonthAndPriceList" parameterType = "java.util.Map" resultType = "com.gdu.cashbook.vo.MonthAndPrice">
+   		SELECT MONTH(cash_date) AS month, 
+		SUM(case when cash_kind = '지출' then -cash_price END) AS price
+		FROM cashbook_cash
+		WHERE member_id = #{memberId}
+		AND YEAR(cash_date) = #{year}
+		GROUP BY MONTH(cash_date) 
    </select>
 
 </mapper>
