@@ -110,6 +110,22 @@
          WHERE member_id= #{memberId} AND cash_kind = '지출' AND cash_date = #{cashDate})
       FROM dual   
    </select>
+   <!-- 일별 가계부 수입의 합 -->
+   <select id = "selectImportDayAndPriceList" parameterType = "com.gdu.cashbook.vo.Cash" resultType="int" >
+   	  SELECT
+         (SELECT IFNULL(SUM(cash_price), 0)
+         FROM cashbook_cash
+         WHERE member_id= #{memberId} AND cash_kind = '수입' AND cash_date = #{cashDate})
+      FROM dual      
+   </select>
+   <!-- 일별 가계부 지출의 합 -->
+   <select id = "selectExpenseDayAndPriceList" parameterType = "com.gdu.cashbook.vo.Cash" resultType="int" >
+   	  SELECT
+         (SELECT IFNULL(SUM(cash_price), 0)
+         FROM cashbook_cash
+         WHERE member_id= #{memberId} AND cash_kind = '지출' AND cash_date = #{cashDate})
+      FROM dual      
+   </select>
    <!-- 월별 수입/지출 리스트 -->
    <select id = "selectImportmonthAndPriceList" parameterType = "java.util.Map" resultType = "com.gdu.cashbook.vo.MonthAndPrice">
    		 SELECT MONTH(cash_date) AS month, 
@@ -120,6 +136,7 @@
 		AND YEAR(cash_date) = #{year}
 		GROUP BY MONTH(cash_date) 
    </select>
+   
    <select id = "selectExpensemonthAndPriceList" parameterType = "java.util.Map" resultType = "com.gdu.cashbook.vo.MonthAndPrice">
    		SELECT MONTH(cash_date) AS month, 
 		SUM(case when cash_kind = '지출' then -cash_price END) AS price

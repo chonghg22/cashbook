@@ -58,7 +58,7 @@ public class BoardController {
 		//디버깅
 			System.out.println(board + "/board/PostAddBoard");
 		//위 메소드가 정상적으로 완료되면 getBoardList.html로 돌아감
-		return "redirect:/getBoardList";
+		return "redirect:/boardList";
 	}
 	
 }

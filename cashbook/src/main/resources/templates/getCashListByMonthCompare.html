@@ -81,7 +81,7 @@ a.insert{
 						<tbody >							
 							<tr>
 								<td class = "content">수입</td>								
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==1" th:text="${mp.price}+'원'"></td>
+								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==${1}" th:text="${mp.price}+'원'"></td>
 								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==2" th:text="${mp.price}+'원'"></td>
 								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==3" th:text="${mp.price}+'원'"></td>	
 								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==4" th:text="${mp.price}+'원'"></td>	

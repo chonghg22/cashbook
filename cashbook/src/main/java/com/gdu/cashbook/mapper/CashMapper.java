@@ -12,6 +12,8 @@ import com.gdu.cashbook.vo.MonthAndPrice;
 @Mapper
 public interface CashMapper {
 	public List<DayAndPrice> selectDayAndPriceList(Map<String, Object> map );	//특정날짜와금액을 가져옴
+	public int selectImportDayAndPriceList(Cash cash);
+	public int selectExpenseDayAndPriceList(Cash cash);
 	public List<Cash> selectCashListByToday(Cash cash);							//특정날짜의 가계부를 가져옴
 	public int selectCashKindSum(Cash cash);									//특정날짜의 수입과 지출 총합을 가져옴
 	public int insertCash(Cash cash);											//가계부 추가

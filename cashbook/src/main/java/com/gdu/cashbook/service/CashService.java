@@ -60,6 +60,16 @@ public class CashService {
 			System.out.println(map + "/map1/CashService");
 		return cashMapper.selectDayAndPriceList(map);
 	}
+	public Map<String, Object> selectImportDayAndPrice(Cash cash){
+		List<Cash> cashList = cashMapper.selectCashListByToday(cash);
+		int importSum = cashMapper.selectImportDayAndPriceList(cash);
+		int expenseSum = cashMapper.selectExpenseDayAndPriceList(cash);
+		Map<String, Object> map = new HashMap<>();
+		map.put("cashList", cashList);
+		map.put("importSum", importSum);
+		map.put("expenseSum", expenseSum);
+		return map;
+	}
 	public Map<String, Object> getCashListByDate(Cash cash){
 		List<Cash> cashList =  cashMapper.selectCashListByToday(cash);
 			System.out.println(cashList + "/cashList/CashService");

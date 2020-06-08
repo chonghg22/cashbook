@@ -2,16 +2,22 @@
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
 <meta name="apple-mobile-web-app-title" content="CodePen">
 <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
 <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
 <link rel="stylesheet" href = "css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href = "css/style1.css">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/script.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
 .extable{
 	position:absolute;
@@ -46,50 +52,103 @@ div.day{
 }
 a.insert{
 	position:absolute;
-	left: 916px;
+	left: 900px;
 }
 </style>
+<script>
+//Accordian Action
+var action = 'click';
+var speed = "500";
+//Document.Ready
+$(document).ready(function(){
+  //Question handler
+$('li.q').on(action, function(){
+  //gets next element
+  //opens .a of selected question
+$(this).next().slideToggle(speed)
+    //selects all other answers and slides up any open answer
+    .siblings('li.a').slideUp();
+  
+  //Grab img from clicked question
+var img = $(this).children('img');
+  //Remove Rotate class from all images except the active
+  $('img').not(img).removeClass('rotate');
+  //toggle rotate class
+  img.toggleClass('rotate');
+
+});//End on click
+});//End Ready
+</script>
 </head>
 <body>
+
 	<div class="container-fleid">
 		<div class="row">
 			<div class="col-sm-3">
 				<div th:include="/include/menu::sidemenu"></div> 
 			</div>
-			<div class="col-sm-6">
-			
+			<div class="col-sm-6">			
 				<div class = "extable">
 				<h1 style = "text-align: center;">게시판</h1>
 				<div>
 					<a class = "left btn btn-primary" href="#">이전</a>	
 					<a class = "right btn btn-primary" href="#">다음</a>
-					<a class = "insert btn btn-primary" href = "#">추가</a>
+					<a class = "insert btn btn-primary" href = "addBoard">글쓰기</a>
 				</div>
 				<table class = "tableset">
 					<thead>
 						<tr>
 							<th class = "dateTitle">No</th>
-							<th class = "dateTitle">아이디</th>
-							<th class = "dateTitle">제목</th>
-							<th class = "dateTitle">날짜</th>
+							<th class = "dateTitle">작성자</th>
+							<th class = "dateTitle">문의제목/내용</th>
+							<th class = "dateTitle">작성일자</th>
+							<th class = "dateTitle">수정</th>
+							<th class = "dateTitle">삭제</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="board, index : ${list} ">
 							<td class = "content" th:text = "${board.boardNo}"></td>
 							<td class = "content" th:text = "${board.memberId}"></td>
-							<td class = "content">
-								<a href = "#" th:text = "${board.boardTitle}"></a>
+							<td class = "content" >							
+								<ul class="faq">
+									<li class="q">
+										<span th:text = "${board.boardTitle}"></span>
+									</li>
+									<li class="a">
+										<span th:text = "'문의내용:'+${board.boardContent}"></span>
+									</li>
+								</ul>
 							</td>
-							<td class = "content" th:text = "${board.boardDate}"></td>							
+							<td class = "content" th:text = "${board.boardDate}"></td>
+							<td class = "content" >
+								<a href = "#">수정</a>
+							</td>	
+							<td class = "content" >
+								<a href = "#">삭제</a>
+							</td>								
 						</tr>						
 					</tbody>
 				</table>			
-			</div>			
 			<div class="col-sm-3">			
+			</div>
 			</div>
 			</div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>	
 </html>
