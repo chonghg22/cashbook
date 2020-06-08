@@ -1,0 +1,33 @@
+
+/*Responsive CSS*/
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+ul, li { list-style: none; }
+
+
+.faq li { padding: 20px; }
+
+.faq li.q {
+  background: #4FC2E;
+  font-weight: bold;
+  font-size: 100%;
+  cursor: pointer;
+
+    padding-bottom: 1px;
+}
+
+.faq li.a {
+  background: #c0c0c0;
+  height : 10px;
+  padding-bottom:40px;
+  display: none;
+  margin-bottom : -17px;
+  color:#fff;
+}
