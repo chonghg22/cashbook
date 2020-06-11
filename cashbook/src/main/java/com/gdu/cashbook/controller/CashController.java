@@ -174,6 +174,7 @@ public class CashController {
 		}
 		//getCashListByMonthCompare.html로 expensemonthAndPriceList변수값을 보낸다.
 		model.addAttribute("expensemonthAndPriceList", expensemonthAndPriceList);
+		
 		//getCashListByMonthCompare.html 호출
 		return "getCashListByMonthCompare";
 	}

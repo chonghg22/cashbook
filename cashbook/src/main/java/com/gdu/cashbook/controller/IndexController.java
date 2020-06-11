@@ -73,8 +73,6 @@ public class IndexController {
 				model.addAttribute("day", day);
 				model.addAttribute("importSum", map.get("importSum"));
 				model.addAttribute("expenseSum", map.get("expenseSum"));
-				int count = 3;
-				model.addAttribute("count", count);
 				return "index";
 	}
 	

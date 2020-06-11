@@ -142,7 +142,7 @@
 		SUM(case when cash_kind = '지출' then -cash_price END) AS price
 		FROM cashbook_cash
 		WHERE member_id = #{memberId}
-		AND YEAR(cash_date) = #{year}
+		AND YEAR(cash_date) = #{year}		
 		GROUP BY MONTH(cash_date) 
    </select>
 

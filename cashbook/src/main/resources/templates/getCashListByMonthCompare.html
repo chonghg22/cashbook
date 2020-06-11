@@ -80,34 +80,83 @@ a.insert{
 						</thead>
 						<tbody >							
 							<tr>
-								<td class = "content">수입</td>								
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==${1}" th:text="${mp.price}+'원'"></td>
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==2" th:text="${mp.price}+'원'"></td>
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==3" th:text="${mp.price}+'원'"></td>	
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==4" th:text="${mp.price}+'원'"></td>	
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==5" th:text="${mp.price}+'원'"></td>	
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==6" th:text="${mp.price}+'원'"></td>	
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==7" th:text="${mp.price}+'원'"></td>	
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==8" th:text="${mp.price}+'원'"></td>	
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==9" th:text="${mp.price}+'원'"></td>	
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==10" th:text="${mp.price}+'원'"></td>	
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==11" th:text="${mp.price}+'원'"></td>	
-								<td class = "content" th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==12" th:text="${mp.price}+'원'"></td>																
+								<td class = "content" >수입</td>						 									
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==1" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원' "></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==2" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==3" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==4" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==5" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==6" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==7" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==8" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==9" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==10" th:text="+ ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==11" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>
+								<td class = "content" >
+									<span th:each="mp : ${importmonthAndPriceList}" th:if="${mp.month}==12" th:text=" ${mp.price}>0 ? '+' + ${mp.price} + '원'" ></span>									
+								</td>																							
 							</tr>
 							<tr>
 								<td class = "content">지출</td>								
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==1" th:text="${ep.price}+'원'"></td>
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==2" th:text="${ep.price}+'원'"></td>
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==3" th:text="${ep.price}+'원'"></td>	
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==4" th:text="${ep.price}+'원'"></td>	
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==5" th:text="${ep.price}+'원'"></td>	
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==6" th:text="${ep.price}+'원'"></td>	
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==7" th:text="${ep.price}+'원'"></td>	
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==8" th:text="${ep.price}+'원'"></td>	
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==9" th:text="${ep.price}+'원'"></td>	
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==10" th:text="${ep.price}+'원'"></td>	
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==11" th:text="${ep.price}+'원'"></td>	
-								<td class = "content" th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==12" th:text="${ep.price}+'원'"></td>																
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==1" th:text="  ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==2" th:text=" ${ep.price}<0 ?   ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==3" th:text="  ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==4" th:text="  ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==5" th:text="  ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==6" th:text=" ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==7" th:text="  ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==8" th:text="  ${ep.price}<0 ? ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==9" th:text="  ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==10" th:text="  ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==11" th:text="  ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+								<td class = "content" >
+									<span th:each = "ep : ${expensemonthAndPriceList}" th:if="${ep.month}==12" th:text=" ${ep.price}<0 ?  ${ep.price} + '원'" ></span>									
+								</td>	
+																						
 							</tr>														
 						</tbody>
 					</table>		
