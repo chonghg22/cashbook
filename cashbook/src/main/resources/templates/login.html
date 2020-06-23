@@ -164,18 +164,18 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<a href = "/index" class = "cashbook">가계부</a>
+	<a th:href = "@{/index}" class = "cashbook">가계부</a>
 	<div class="box">
 
 	<h1>로그인</h1>
-		<form  method = "post" action="/login" id = "loginForm">
+		<form  method = "post" th:action="@{/login}" id = "loginForm">
 			<input type="text" name="memberId" id="memberId" placeholder="아이디"  required>            
 			<input type="password" name = "memberPw" id="memberPw" placeholder="비밀번호" required>            
 			<input type="button" value="로그인" id = "btn">            
 				
 			<br>
 			<div th:if="${session.loginMember ==null}">
-				<a href="/adminLogin"  type = "button" class = "btn">관리자</a>
+				<a th:href="@{/adminLogin}"  type = "button" class = "btn">관리자</a>
 			</div>
 			<br>
 			<div>

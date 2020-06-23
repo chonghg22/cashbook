@@ -59,10 +59,10 @@
 			<div th:if="${session.loginMember ==null}">
 				<ul class="sidebarMenuInner">		
 					<li>		
-						<a href="/login"  type = "button" class = "btn">로그인</a>		
+						<a th:href="@{/login}"  type = "button" class = "btn">로그인</a>		
 					</li>
 					<li>
-						<a href="/addMember" type = "button"  class = "btn">회원가입</a>
+						<a href="http://chonghg21.cafe24.com/cashbook/addMember" type = "button"  class = "btn">회원가입</a>
 					</li>		
 					<li>
 						<a th:href = "@{/boardList}" target="_blank">게시판</a>

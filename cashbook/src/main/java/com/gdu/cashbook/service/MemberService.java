@@ -34,7 +34,7 @@ public class MemberService {
 	@Autowired
 	private JavaMailSender javaMailSender; //bean생성 -> @Component
 	
-	@Value("C:\\Users\\JJH\\Desktop\\새 폴더 (2)\\maven.1590625155864\\cashbook\\src\\main\\resources\\static\\upload\\")
+	@Value("C:\\Users\\JJH\\Desktop\\project\\maven.1591853179609\\cashbook\\src\\main\\resources\\static\\upload\\")
 	private String path;
 	
 	public List<Member> getselectMember(Member member){
