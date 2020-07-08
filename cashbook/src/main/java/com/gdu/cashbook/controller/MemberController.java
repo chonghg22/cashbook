@@ -237,7 +237,7 @@ public class MemberController {
 	}
 	
 	// 로그아웃 Action
-	@GetMapping("logout")
+	@GetMapping("/logout")
 	public String logout(HttpSession session) {										
 		//로그인이 되어있지 않으면 index로 돌아가는 조건문
 		if(session.getAttribute("loginMember") == null) {							

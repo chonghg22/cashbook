@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ㅈ<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
@@ -7,21 +7,36 @@
 <link href="/css/registerForm.css" rel="stylesheet" media="all">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$(document).ready(function(){
-		$('#categoryBtn').click(function(){
-			$('#addForm').submit();			
-		});
-	});
+//확인 버튼을 클릭했을때 공란이면  모든칸은 초기화 된다.
+let helperInit = function(){
 
+	$('#categoryHelper').text("");
+	};
+//document(body)가 준비되면 작동된다.
+$(document).ready(function(){
+	$('#categoryBtn').click(function(){	
+	if($('#categoryName').val().length ===0) {
+		helperInit();
+		$('#categoryHelper').text("카테고리를 입력하세요.");
+		$('#categoryName').focus();		
+	}else {
+		$('#addForm').submit();
+	}
+	
+	});	
+});
 </script>
 </head> 
 <body>
 	<div class="box">
-	<h1>정보수정</h1>        
-		<form id="addForm" action="/addCategory" method="post" >			
+	<h1>항목추가</h1>        
+		<form id="addForm" th:action="@{/addCategory}" method="post" >			
 			<div>
 				<div class = "name">카테고리</div>       		
-				<input type="text" name="categoryName">
+				<input type="text" name="categoryName" id = "categoryName">
+				<p>
+					<span id = "categoryHelper"></span>
+				</p>
 			</div>
 			<div>
 				<button type="button" id="categoryBtn">작성완료</button>

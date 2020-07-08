@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
 <!-- jQuery library -->
-<link href="/css/registerForm.css" rel="stylesheet" media="all">
+<link href="css/registerForm.css" rel="stylesheet" media="all">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
@@ -51,7 +51,7 @@ img.pic{
 			</div>
 			<div>
 				<div class = "name">가입날짜</div>     		
-				<input type="text" th:value="${member.memberDate}" readonly = "readonly">
+				<input type="text" th:value="${member.memberDate.substring(0,16)}" readonly = "readonly">
 			</div>
 			<div>
 				<div class = "name">비밀번호</div>     		

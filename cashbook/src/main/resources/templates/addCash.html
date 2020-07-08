@@ -4,21 +4,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- jQuery library -->
-<link href="/css/registerForm.css" rel="stylesheet" media="all">
+<link href="css/registerForm.css" rel="stylesheet" media="all">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$(document).ready(function(){
-		$('#cashBtn').click(function(){
-			$('#modifyForm').submit();			
-		});
-	});
+//확인 버튼을 클릭했을때 공란이면  모든칸은 초기화 된다.
+let helperInit = function(){
 
+	$('#categoryHelper').text("");
+	$('#pirceHelper').text("");
+};
+//document(body)가 준비되면 작동된다.
+$(document).ready(function(){
+document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);;
+	$('#cashBtn').click(function(){	
+	if($('#categoryName').val()=="none") {
+		helperInit();
+		$('#categoryHelper').text("카테고리를 선택하세요.");
+		$('#categoryName').focus();		
+	}else if ($('#cashPrice').val().length ===0 ){
+		helperInit();
+		$('#pirceHelper').text("금액을 입력하세요.");
+		$('#cashPrice').focus();
+	}else {
+		$('#addCash').submit();
+	}	
+	});	
+});
 </script>
 </head> 
 <body>
 	<div class="box">
-	<h1>정보수정</h1>        
-		<form id="modifyForm" action="/addCash" method="post" >
+	<h1>가계부 추가</h1>        
+		<form id="addCash" th:action="@{/addCash}" method="post" >
 			<div>
 			<div class = "name">종류</div>    		
 				<input type="radio" id="radio1" name="cashKind" value = "수입" checked/>
@@ -32,17 +49,23 @@
 			<div>
 				<div class = "name">카테고리</div>  
 				<select name="categoryName" id = "categoryName" style = "vertical-align: middle; text-align-last: center">
-					<option>카테고리</option>
+					<option value = "none">카테고리</option>
 					<option th:each="i : ${category}" th:value="${i.categoryName}" th:text="${i.categoryName}"></option>
 				</select>
+				<p>
+					<span id = "categoryHelper"></span>
+				</p>
 			</div>
 			<div>
 				<div class = "name">금액</div>       		
-				<input type="text" name="cashPrice">
+				<input type="text" name="cashPrice" id = "cashPrice">
+				<p>
+					<span id = "pirceHelper"></span>
+				</p>
 			</div>
 			<div>
 				<div class = "name">장소</div>      		
-				<input type="text" name="cashPlace">
+				<input type="text" name="cashPlace" id = "cashPlace">
 			</div>
 			<div>
 				<div class = "name">메모</div>     		
@@ -50,8 +73,10 @@
 			</div>
 			<div>
 				<div class = "name">날짜</div>  
-				<input type = "date" name="cashDate">
+				<input type = "date" name="cashDate" id='currentDate'>
 			</div>
+
+			
 			<div>
 				<button type="button" id="cashBtn">작성완료</button>
 			</div>            

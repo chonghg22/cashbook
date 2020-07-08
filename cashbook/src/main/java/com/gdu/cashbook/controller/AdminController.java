@@ -24,41 +24,8 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	//회원 리스트 Form
-	@GetMapping("/memberList")
-	public String memberList(HttpSession session, Member member, Model model) {
-		//memberService에 있는 getselectMember 메소드를 list 변수에 담음 
-		List<Member> list = memberService.getselectMember(member);
-		//디버깅
-	 		System.out.println(list + "/list/getMemberList");	
-	   	 //getMemberList로 list값을 넘겨주고 변수명은 "list"
-		 model.addAttribute("list", list);			 	
-		 //현재 로그인 되어있는 회원값을 loginMember 변수에 담음
-		 LoginMember loginMember = (LoginMember)session.getAttribute("loginMember");
-		 //디버깅
-		 	System.out.println(loginMember + "/loginMember/getMemberList");
-		 //getMemberList로 loginMember값을 넘겨줌
-		 model.addAttribute("loginMember", loginMember);		
-		 //getMemberList.html 호출
-		 return "getMemberList";
-	}
-	
-	
-	//관리자 수정 Form
-	@GetMapping("/updateAdmin")
-	public String updateAdmin(HttpSession session, Model model, @RequestParam("memberId") String memberId) {
-		//getMemberList 보낸 memberId값이 들어왔는지 디버깅
-		System.out.println(memberId + "/memberId/getUpdateAdmin");		
-		//로그인되어있지 않으면 index로 돌아가는 조건문
-		if(session.getAttribute("loginMember") == null) {							
-			return "redirect:/";												
-		}
-		//adminServie에 updateAmind 메소드로 memberId값을 보냄
-		adminService.updateAdmin(memberId);
-		//resultadmin.html 호출
-		return "resultadmin";
-	}
-	
+
+
 	
 	//관리자 로그인 Form
 	@GetMapping("/adminLogin")

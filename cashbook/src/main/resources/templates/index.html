@@ -3,156 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<link rel="apple-touch-icon" type="image/png"
+	href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
 <meta name="apple-mobile-web-app-title" content="CodePen">
-<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
-<link rel="stylesheet" href = "css/style.css">
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon"
+	href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type=""
+	href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+	color="#111" />
+<link rel="stylesheet" href="css/style.css">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- Icons -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="css/index.css" />
+
 <title>Insert title here</title>
-<style>
 
-/*
-login css start
- */
-
-
-
-.graph{
-    position: absolute;
-	top : 150px;
-	left : 300px;
-}
-h1.h1{
-    position: absolute;
-	top : 200px;
-	left : 700px;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 45px;
-    color: #000000;
-}
-h2.h2{
-    position: absolute;
-	top : 300px;
-	left : 450px;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 45px;
-}
-
-#copyRight1 {
-	color: #babbba;
-	font-size: 10px;
-}
-#copyRight2 {
-	text-align: center;
-	font-size: 14px;
-}
-.copyRight {
-	position: absolute;
-	top : 800px;
-	left : 900px;
-}
-
-/*
-login css end
-*/
-</style>
 </head>
 <body id="page-top">
 	<div class="container-fleid">
 		<div class="row">
-			<div class="col-sm-2">
-				<div th:include="/include/menu::sidemenu"></div> 
+			<div class="col-xl-2">
+				<div th:include="/include/menu::sidemenu"></div>
 			</div>
-			<div class="col-sm-10 graph">
-				<div th:if="${session.loginMember !=null}">
-				<div id="wrapper">
+			<div class="col-xl-10 graph">
+			
+				<div id="wrapper" style = "margin-top: 70px;">
+				
 					<div id="content-wrapper" class="d-flex flex-column">
-						    <!-- Main Content -->
-						<div id="content">
-						<br>
-						<!-- Begin Page Content -->
+						<!-- Main Content -->
+						<div id="content"  style = "margin-top: 20px;">							
+							<!-- Begin Page Content -->
 							<div class="container-fluid">
-							  <!-- Content Row -->
+								<!-- Content Row -->
 								<div class="row">
-								  <!-- Earnings (Monthly) Card Example -->
-								<div class="col-xl-3 col-md-6 mb-4">
-									<div class="card border-left-primary shadow h-100 py-2">
-										<div class="card-body">
-											<div class="row no-gutters align-items-center">
-												<div class="col mr-2">
-													<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">금일 수입</div>
-													<div class="h5 mb-0 font-weight-bold text-gray-800">
-														<span  th:text = "${importSum}+'원'"></span>
+								
+									<!-- Earnings (Monthly) Card Example -->
+									
+									<div class="col-xl-3 col-md-6 mb-4">
+									
+										<div class="card border-left-primary shadow h-100 py-2" >
+											<div class="card-body">
+												<div class="row no-gutters align-items-center">
+													<div class="col mr-2">
+														<div
+															class="text-xs font-weight-bold text-primary text-uppercase mb-1">금일
+															수입</div>
+														<div class="h5 mb-0 font-weight-bold text-gray-800">
+															<span th:if = "${importSum}  !=null" th:text="${importSum}+'원'"></span>
+														</div>
 													</div>
-												</div>
-												<div>
-												<span id = "count"></span>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+													<div>
+														<span id="count"></span>
+													</div>
+													<div class="col-auto">
+														<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<!-- Earnings (Monthly) Card Example -->
-								<div class="col-xl-3 col-md-6 mb-4">
-									<div class="card border-left-success shadow h-100 py-2">
-										<div class="card-body">
-											<div class="row no-gutters align-items-center">
-												<div class="col mr-2">
-													<div class="text-xs font-weight-bold text-success text-uppercase mb-1">금일 지출</div>
-													<div class="h5 mb-0 font-weight-bold text-gray-800">
-														<span  th:text = "${expenseSum}+'원'"></span>
+									<!-- Earnings (Monthly) Card Example -->
+									<div class="col-xl-3 col-md-6 mb-4">
+										<div class="card border-left-success shadow h-100 py-2">
+											<div class="card-body">
+												<div class="row no-gutters align-items-center">
+													<div class="col mr-2">
+														<div
+															class="text-xs font-weight-bold text-success text-uppercase mb-1">금일
+															지출</div>
+														<div class="h5 mb-0 font-weight-bold text-gray-800">
+															<span th:if = "${importSum}  !=null" th:text="${expenseSum}+'원'"></span>
+														</div>
 													</div>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+													<div class="col-auto">
+														<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<!-- Earnings (Monthly) Card Example -->
-								<div class="col-xl-3 col-md-6 mb-4">
-									<div class="card border-left-info shadow h-100 py-2">
-										<div class="card-body">
-											<div class="row no-gutters align-items-center">
-												<div class="col mr-2">
-													<div class="text-xs font-weight-bold text-success text-uppercase mb-1">이달의 수입</div>
-													<div class="h5 mb-0 font-weight-bold text-gray-800">
-														<span th:each = "mp : ${importmonthAndPriceList}"  th:if="${mp.month}==${month}" th:text="${mp.price}+'원'"></span>
+									<!-- Earnings (Monthly) Card Example -->
+									<div class="col-xl-3 col-md-6 mb-4">
+										<div class="card border-left-info shadow h-100 py-2">
+											<div class="card-body">
+												<div class="row no-gutters align-items-center">
+													<div class="col mr-2">
+														<div
+															class="text-xs font-weight-bold text-success text-uppercase mb-1">이달의
+															수입</div>
+														<div class="h5 mb-0 font-weight-bold text-gray-800">
+															<span th:each="mp : ${importmonthAndPriceList}"
+																th:if="${mp.month}==${month}" th:text="${mp.price}+'원'"></span>
+														</div>
 													</div>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+													<div class="col-auto">
+														<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>							<!-- Pending Requests Card Example -->
-								<div class="col-xl-3 col-md-6 mb-4">
-									<div class="card border-left-warning shadow h-100 py-2">
-										<div class="card-body">
-											<div class="row no-gutters align-items-center">
-												<div class="col mr-2">
-													<div class="text-xs font-weight-bold text-success text-uppercase mb-1">이달의 지출</div>
-													<div class="h5 mb-0 font-weight-bold text-gray-800">
-														<span th:each = "ep : ${expensemonthAndPriceList}"  th:if="${ep.month}==${month}" th:text="${ep.price}+'원'"></span>
+									<!-- Pending Requests Card Example -->
+									<div class="col-xl-3 col-md-6 mb-4">
+										<div class="card border-left-warning shadow h-100 py-2">
+											<div class="card-body">
+												<div class="row no-gutters align-items-center">
+													<div class="col mr-2">
+														<div
+															class="text-xs font-weight-bold text-success text-uppercase mb-1">이달의
+															지출</div>
+														<div class="h5 mb-0 font-weight-bold text-gray-800">
+															<span th:each="ep : ${expensemonthAndPriceList}"
+																th:if="${ep.month}==${month}" th:text="${ep.price}+'원'"></span>
+														</div>
 													</div>
-												</div>
-												<div class="col-auto">
-													<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-												</div>
+													<div class="col-auto">
+														<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -162,31 +153,81 @@ login css end
 						</div>
 					</div>
 				</div>			
-				</div>				
-					<h1 class = "h1">안녕하세요.</h1>
-					<h2 class = "h2">
-					<p>자금을 보다 효율적으로 관리해보세요.</p>
-					<p>테스트OS, 서비스OS : Window10</p>
-					<p>Language : JAVA8, HTML5, CSS3, JAVAScript</p>
-					<p>웹서버 : Apache Tomcat9</p>
-					<p>프론트 : JQuery 3.5.1, AJAX, BootStrap4</p>
-					<p>백엔드: MariaDB.1</p>
-					<p>빌드툴: Maven</p>
-					<p>개발툴: heidi SQL 11.0</p>
-					<p>서버관리 GitHub<p>
-					<p>웹서버: Tomcat8.0.x</p>
-					</h2>	
-											
+			<section id="two" class="wrapper style3 fade-up" >
+			<div class="inner">
+						<h1>제작자</h1>
+						<p>정종혁</p>
+						<h1>프로젝트 목적</h1>
+						<p>Thymeleaf를 사용하여 달력 구현 및 SPRING과 Mybatis 사용하여 효율적인 작업을 숙달하기 위해 만든 가계부 프로젝트입니다.</p>
+	
+				<h1>Tool</h1>
+						
+				<div class="features">
+					<section>
+						<span class="icon solid major fa-desktop"></span>
+						<h3>Use Language</h3>
+						<p>JAVA8,HTML5,CSS3,JAVA Script</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-desktop"></span>
+						<h3>Test,Service OS</h3>
+						<p>Window10</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-cog"></span>
+						<h3>FrontEnd</h3>
+						<p>JQuery, Bootstrap4</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-cog"></span>
+						<h3>BackEnd</h3>
+						<p>Spring boot, Thymeleaf</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-link"></span>
+						<h3>DataBase</h3>
+						<p>MariaDB 10.1</p>
+					</section>
+					<section>
+						<span class="icon solid major fa-link"></span>
+						<h3>GitHub</h3>
+						<p>Address : https://github.com/chonghg22</p>
+					</section>
 			</div>
-			<div class="col-sm-0">
+			<ul class="menu">
+					<li><p>CopyRight</p></li>
+					<li><p>본 콘텐츠의 저작권은 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에
+			따라 법적 책임을 질 수 있습니다.</p></li>
+					<li><p>&copy; Copyright © JJH. All Rights Reserved.</p></li>
+					<li><p>&copy; Untitled. All rights reserved.</p></li>
+					<li><p>Design: <a href="http://html5up.net">HTML5 UP</a></p></li>
+				</ul>
 			</div>
-		</div>
-	</div>	
-	<div class = "copyRight">  		
-		<div id="copyRight1">본 콘텐츠의 저작권은 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적 책임을 질 수 있습니다.</div>
-		<div id="copyRight2">Copyright © JJH. All Rights Reserved.</div>
+		</section>
+
+
+		
 	</div>
-<!-- Bootstrap core JavaScript-->
+			</div>
+			<div class="col-sm-0"></div>
+		</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- Core plugin JavaScript-->
@@ -197,6 +238,6 @@ login css end
 	<script src="vendor/chart.js/Chart.min.js"></script>
 	<!-- Page level custom scripts -->
 	<script src="js/demo/chart-area-demo.js"></script>
-	<script type = "text/javascript"></script>
+	<script type="text/javascript"></script>
 </body>
 </html>

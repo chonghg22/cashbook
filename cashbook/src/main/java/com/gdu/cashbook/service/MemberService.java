@@ -118,11 +118,19 @@ public class MemberService {
 		MultipartFile mf = memberForm.getMemberPic();
 		String originName = mf.getOriginalFilename();
 		
-		int lastDot = originName.lastIndexOf(".");
-		String extension = originName.substring(lastDot);
+		String memberPic = null;
+		if(originName.equals("")) {
+			System.out.println("originName = '' ");
+			memberPic = "default.jpg";
+		}else {
+			// 마지막 점의 위치
+			int lastDot = originName.lastIndexOf(".");
+			System.out.println(lastDot + "/lastDot/memberService");
+			String extension = originName.substring(lastDot);
+			memberPic = memberForm.getMemberId() + extension;
+			System.out.println(memberPic + "/memberPic/memberService");
+		}
 		
-		String memberPic = memberForm.getMemberId() + extension;
-		System.out.println(memberPic + " <--memberPic modifyMemberInfo");
 		
 		Member member = new Member();
 		member.setMemberId(memberForm.getMemberId());
@@ -139,16 +147,27 @@ public class MemberService {
 		System.out.println(member.getMemberEmail());
 		System.out.println(member.getMemberPic());
 		int row = memberMapper.updateMember(member);
-		File file = new File(path + memberPic);
-		try {
-			mf.transferTo(file);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
-		
+		if(!originName.equals("")) {
+			File file = new File(path + memberPic);
+			System.out.println(path + "<---Path");
+			
+			// 2. 파일저장(static/upload)
+			
+			
+			try {
+				mf.transferTo(file);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace(); // 아래 코드가 없으면 여기서 끝나버린다.
+				throw new RuntimeException(); // 그래서 다시 예외를 발생시킨다. -> @Transactional이 rollback 시킨다.
+				// Exception
+				// 1. 문법적으로 반드시 예외처리를 해야만 하는 경우
+				// 2. 예외처리를 하지 않아도 되는 경우 ex) RuntimeException
+			}
+			}
+			// 3. service 보내기
+			
 		return row;
 	}
 	

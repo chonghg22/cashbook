@@ -1,7 +1,7 @@
 package com.gdu.cashbook.controller;
 
 
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.cashbook.service.BoardService;
 import com.gdu.cashbook.vo.Board;
+import com.gdu.cashbook.vo.Comment;
 import com.gdu.cashbook.vo.LoginMember;
 
 @Controller
@@ -20,45 +22,179 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	//게시판 리스트 Form
-	@GetMapping("/boardList")
-	public String boardList(Model model, Board board) {
-		//boardService 내 selectBaordList 메소드를 list변수에 담음
-		List<Board> list = boardService.selectBoardList();
-		//디버깅
-			System.out.println(list + "/list/getBoardList");
-		//list 변수값을 getBoardList.html로 보내줌
-		model.addAttribute("list", list);			
-		//getBoardList.html 호출
-		return "getBoardList";
-	
-	//게시글 추가 Form
+	@GetMapping("/removePost")
+	public String removePost(HttpSession session, Comment comment,
+			@RequestParam(value="boardId", required = false) String boardId) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/index";
+		}
+		
+		String adminCheck = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		if(adminCheck.equals("admin")) {
+			comment.setMemberId(boardId);
+			int result = boardService.removePost(comment);
+			if(result == 0) {
+				System.out.println("admin 게시글 삭제 실패");
+			} else {
+				System.out.println("admin 게시글 삭제 성공");
+			}
+			return "redirect:/getBoardList";
+		}
+		
+		int result = boardService.removePost(comment);
+		if(result == 0) {
+			System.out.println("게시글 삭제 실패");
+		} else {
+			System.out.println("게시글 삭제 성공");
+		}
+		return "redirect:/getBoardList";
 	}
-	@GetMapping("/addBoard")
-	public String addBoard(HttpSession session, Model model, Board board ) {
-		//로그인 되어있지 않으면 index로 돌아가는 조건문
-		if(session.getAttribute("loginMember")==null) {
+	
+	@GetMapping("/removeComment")
+	public String removeCommen(HttpSession session, Comment comment,
+			@RequestParam(value="commentId", required = false) String commentId) {
+		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
 		}
-		//현재 로그인 되어있는 회원정보를 가져와서 loginMember 변수에 담음
-		LoginMember loginMember = (LoginMember) session.getAttribute("loginMember");
-		//디버깅
-			System.out.println(loginMember + "/loginMember/getAddBoard");
-		//loginMember의 값을 addBoard.html로 넘겨줌
-		model.addAttribute("loginMember", loginMember);		
-		//addBoard.html 호출
-		return "addBoard";
+		String adminCheck = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		if(adminCheck.equals("admin")) {
+			comment.setMemberId(commentId);
+			int result = boardService.removeComment(comment);
+			if(result == 0) {
+				System.out.println("admin 댓글 삭제 실패");
+			} else {
+				System.out.println("admin 댓글 삭제 성공");
+			}
+			return "redirect:/detailView?boardNo=" + comment.getBoardNo();
+		}
+		int result = boardService.removeComment(comment);
+		
+		if(result == 0) {
+			System.out.println("댓글 삭제 실패");
+		} else {
+			System.out.println("댓글 삭제 성공");
+		}
+		
+		return "redirect:/detailView?boardNo=" + comment.getBoardNo();
 	}
 	
-	//게시글 추가  Action
-	@PostMapping("/addBoard")
-	public String addBoard(Board board) {
-		//게시글 추가 Form에서 입력된 board값을 boardService 내 insertBoard 메소드로 보냄 
-		boardService.insertBoard(board);
-		//디버깅
-			System.out.println(board + "/board/PostAddBoard");
-		//위 메소드가 정상적으로 완료되면 getBoardList.html로 돌아감
-		return "redirect:/boardList";
+	// 댓글 달기
+	@PostMapping("/addComment")
+	public String addComment(HttpSession session, Comment comment) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/cashbook/";
+		}
+		int result = boardService.addComment(comment);
+		
+		if(result == 0) {
+			System.out.println("댓글 작성 실패");
+		} else {
+			System.out.println("댓글 작성 성공");
+		}
+		
+		return "redirect:/detailView?boardNo=" + comment.getBoardNo();
 	}
 	
+	// 게시글 수정
+	@GetMapping("/modifyPost")
+	public String modifyPost(Model model, HttpSession session, @RequestParam(value="boardNo") int boardNo) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		
+		String memberId = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		Board board = new Board();
+		board.setMemberId(memberId);
+		board.setBoardNo(boardNo);
+		
+		Board postOne = boardService.getPostOne(board);
+		
+		model.addAttribute("postOne", postOne);
+		model.addAttribute("memberId", memberId);
+		model.addAttribute("boardNo", boardNo);
+		return "modifyPost";
+	}
+	@PostMapping("/modifyPost")
+	public String modifyPost(Model model, HttpSession session, Board board) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		
+		System.out.println(board.getBoardTitle() + "<-- boardTitle");
+		System.out.println(board.getBoardContent() + "<-- boardContent");
+	
+		int result = boardService.modifyPost(board);
+		
+		if(result == 0) {
+			System.out.println("수정 실패");
+		} else {
+			System.out.println("수정 성공");
+		}
+		return "redirect:/detailView?boardNo=" + board.getBoardNo();
+	}
+	
+	// 상세보기
+	@GetMapping("/detailView")
+	public String detailView(Model model, HttpSession session, @RequestParam(value="boardNo") int boardNo,
+			@RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		String memberId = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		Map<String, Object> detailView = boardService.getDetailView(boardNo, currentPage);
+		model.addAttribute("memberId", memberId);
+		model.addAttribute("boardOne", detailView.get("boardOne"));
+		model.addAttribute("lastPage", detailView.get("lastPage"));
+		model.addAttribute("commentList", detailView.get("commentList"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("boardNo", boardNo);
+		return "/detailView";
+	}
+	
+	// 글쓰기
+	@GetMapping("/addPost")
+	public String addPost(Model model, HttpSession session) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		
+		String memberId = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		model.addAttribute("memberId", memberId);
+		return "addPost";
+	}
+	@PostMapping("/addPost")
+	public String addPost(Model model, HttpSession session, Board board) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+	
+		int result = boardService.addPost(board);
+	
+		if(result == 1) {
+			System.out.println("작성 성공");
+		} else {
+			System.out.println("작성 실패");
+		}
+		return "redirect:/getBoardList?memberId="+board.getMemberId();
+	}
+	// 게시판 목록
+	@GetMapping("/getBoardList")
+	public String boardList(Model model, HttpSession session,
+			@RequestParam(value="currentPage", defaultValue="1" ) int currentPage) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		
+		String memberId = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		
+		Map<String, Object> boardList = boardService.getBoardList(currentPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("memberId", memberId);
+		model.addAttribute("boardList", boardList.get("list"));
+		model.addAttribute("lastPage", boardList.get("lastPage"));
+		
+		System.out.println(boardList.get("list"));
+		return "getBoardList";
+	}
 }
+

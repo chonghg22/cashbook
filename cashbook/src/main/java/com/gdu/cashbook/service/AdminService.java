@@ -15,9 +15,5 @@ public class AdminService {
 	public String loginAdmin(Admin admin) {
 		return adminMapper.selectLoginAdmin(admin);
 	}
-	public void updateAdmin(String memberId) {
-		Member member = new Member();
-		member.setMemberId(member.getMemberId());
-		adminMapper.insertAdmin(memberId);
-	}
+
 }

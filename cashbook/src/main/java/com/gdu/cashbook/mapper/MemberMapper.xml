@@ -137,7 +137,7 @@
 	
 	<!-- 회원가입 쿼리 -->
 	<insert id="insertMember" parameterType="com.gdu.cashbook.vo.Member">
-		INSERT INTO member
+		INSERT INTO cashbook_member
 		(
 			member_id, 
 			member_pw,

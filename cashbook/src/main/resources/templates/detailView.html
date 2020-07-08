@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<link rel="stylesheet" href = "css/style.css">
+<link rel="stylesheet" href = "css/style1.css">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+.extable{
+	position:absolute;
+	top:250px;
+	left:200px;
+	width:100%;
+	height:337px;
+	border: 1px;
+	
+}
+table.tableset{
+	border: 3px; 
+}
+th.dateTitle{
+	border: 2px solid #D5D5D5;
+	width: 800px;
+	height: 30px;
+	text-align: center;
+	background: #EAEAEA;
+	font-weight: bolder;
+}
+td.content{
+	border: 2px solid #D5D5D5;
+	width: 800px;
+	height: 50px;
+	text-align: center;
+	background: #FFFFFF;
+}
+div.day{
+	text-align: center;
+	font-size: 30px;
+}
+a.insert{
+	position:absolute;
+	left: 900px;
+}
+
+</style>
+</head>
+<body>
+
+	<div class="container-fleid">
+		<div class="row">
+			<div class="col-sm-3">
+				<div th:include="/include/menu::sidemenu"></div> 
+			</div>
+			<div class="col-sm-6">
+		<h1 style = "padding-top: 100px; text-align: center;">상세보기</h1>
+		<br>
+		<div th:switch="${memberId}" style = "padding-left: 730px;">
+				<div th:case="${boardOne.memberId}">
+					<span><a th:href="@{/getBoardList}"><button class="btn btn-primary">목록으로</button></a></span>
+					<span><a th:href="@{/modifyPost(boardNo=${boardNo},memberId=${memberId})}"><button class="btn btn-warning">수정</button></a></span>
+					<span><a th:href="@{/removePost(boardNo=${boardNo},memberId=${memberId})}"><button class="btn btn-danger">삭제</button></a></span>
+				</div>
+				<div th:case="'admin'">
+					<span><a th:href="@{/removePost(boardNo=${boardNo},memberId=${memberId},boardId=${boardOne.memberId})}"><button class="btn btn-danger">삭제</button></a></span>
+				</div>
+				<div th:case="*">
+				</div>
+			</div>
+			<br>
+		<div><input class="inputBox form-control" type="text" th:value="${boardOne.boardTitle}" readonly="readonly"></div>
+		<br>
+		<div class="row">
+			<span class="col">
+				<input class="idAndDate form-control" type="text" th:value="${boardOne.memberId}" readonly="readonly">
+			</span>	
+			<span class="col">
+				<input class="idAndDate form-control" type="text" th:value="${boardOne.boardDate.substring(0,16)}" readonly="readonly">
+			</span>	
+		</div>
+		<br>
+		<div><textarea class="form-control" rows="10" cols="106" th:text="${boardOne.boardContent}" readonly="readonly"></textarea></div>
+		<br>
+		<div id="viewFooter">
+			
+			
+		</div>
+		<br>
+		<form th:action="@{/addComment(boardNo=${boardNo},memberId=${memberId})}" method="post">
+			<table>
+				<tr>
+					<td><input style="width:150px;" class="form-control" type="text" th:value="${memberId}" readonly="readonly"></td>
+					<td><input style="width:500px;" class="form-control" type="text" name="comment" placeholder="댓글 작성"></td>
+					<td><button style="width:120px;" type="submit" class="btn btn-secondary">작성</button></td>
+				</tr>
+			</table>
+		</form> 
+		<br>
+		<table>
+			<tr th:each="cl : ${commentList}">
+				<td><input style="width:150px;" th:class="${cl.memberId} == 'admin' ? 'form-control admin' : 'form-control'" type="text" th:value="${cl.memberId}" readonly="readonly"></td>
+				<td><input style="width:503px;" th:class="${cl.memberId} == 'admin' ? 'form-control admin' : 'form-control'" type="text" th:value="${cl.comment}" readonly="readonly"></td>
+				<td><a th:href="@{/}"><button class="btn btn-warning">수정</button></a></td>
+				<td><a th:href="@{/removeComment(boardNo=${boardNo},memberId=${memberId},commentNo=${cl.commentNo},commentId=${cl.memberId})}"><button class="btn btn-danger">삭제</button></a></td>
+			</tr>
+		</table>
+		<br>				
+		</div>
+	</div>
+	</div>
+</body>
+</html>

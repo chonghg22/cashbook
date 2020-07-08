@@ -4299,7 +4299,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .card {
-	position: relative;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
 	min-width: 0;
@@ -4307,7 +4307,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 	background-color: #fff;
 	background-clip: border-box;
 	border: 1px solid #e3e6f0;
-	border-radius: .35rem
+	border-radius: .35rem;
+	
 }
 
 .card>hr {
@@ -4326,12 +4327,14 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .card-body {
+	top : 500px;
 	flex: 1 1 auto;
 	padding: 1.25rem
 }
 
 .card-title {
-	margin-bottom: .75rem
+	margin-bottom: .75rem;
+	margin-top: 50px;
 }
 
 .card-subtitle {
@@ -4353,6 +4356,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 
 .card-header {
 	padding: .75rem 1.25rem;
+	margin-top : 40px;
 	margin-bottom: 0;
 	background-color: #f8f9fc;
 	border-bottom: 1px solid #e3e6f0
@@ -5936,10 +5940,6 @@ a.close.disabled {
 	display: none
 }
 
-.popover-body {
-	padding: .5rem .75rem;
-	color: #858796
-}
 
 .carousel {
 	position: relative

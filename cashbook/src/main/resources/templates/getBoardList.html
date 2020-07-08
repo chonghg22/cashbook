@@ -55,30 +55,6 @@ a.insert{
 	left: 900px;
 }
 </style>
-<script>
-//Accordian Action
-var action = 'click';
-var speed = "500";
-//Document.Ready
-$(document).ready(function(){
-  //Question handler
-$('li.q').on(action, function(){
-  //gets next element
-  //opens .a of selected question
-$(this).next().slideToggle(speed)
-    //selects all other answers and slides up any open answer
-    .siblings('li.a').slideUp();
-  
-  //Grab img from clicked question
-var img = $(this).children('img');
-  //Remove Rotate class from all images except the active
-  $('img').not(img).removeClass('rotate');
-  //toggle rotate class
-  img.toggleClass('rotate');
-
-});//End on click
-});//End Ready
-</script>
 </head>
 <body>
 
@@ -87,49 +63,45 @@ var img = $(this).children('img');
 			<div class="col-sm-3">
 				<div th:include="/include/menu::sidemenu"></div> 
 			</div>
-			<div class="col-sm-6">			
+			<div class="col-sm-6">
+				<div><a th:href="@{/addPost}"><button class="btn btn-success">글쓰기</button></a></div>
+				<form th:action="@{/getBoardList}" method="post">
+					<span><input class="form-control searchBar" type="text" name="search">
+					<button class="searchBtn btn"><i class='fas fa-search' style='font-size:24px'></i></button></span>
+				</form>			
 				<div class = "extable">
 				<h1 style = "text-align: center;">게시판</h1>
 				<div>
-					<a class = "left btn btn-primary" href="#">이전</a>	
-					<a class = "right btn btn-primary" href="#">다음</a>
-					<a class = "insert btn btn-primary" href = "addBoard">글쓰기</a>
+					<a class = "left btn btn-primary" th:href="${currentPage} == 1 ? @{/getBoardList} : @{/getBoardList(currentPage=${currentPage-1})}">이전</a>
+						
+					<a class = "right btn btn-primary" th:href="${currentPage} == ${lastPage} ? @{/getBoardList(currentPage=${lastPage})} : @{/getBoardList(currentPage=${currentPage+1})}">다음</a>
+					
+					<a class = "insert btn btn-primary" th:href = "@{/addPost}">글쓰기</a>
 				</div>
+				<br>
 				<table class = "tableset">
 					<thead>
 						<tr>
 							<th class = "dateTitle">No</th>
+							<th class = "dateTitle">제목</th>
 							<th class = "dateTitle">작성자</th>
-							<th class = "dateTitle">문의제목/내용</th>
 							<th class = "dateTitle">작성일자</th>
-							<th class = "dateTitle">수정</th>
-							<th class = "dateTitle">삭제</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="board, index : ${list} ">
+						<tr th:each="board : ${boardList}">
 							<td class = "content" th:text = "${board.boardNo}"></td>
-							<td class = "content" th:text = "${board.memberId}"></td>
-							<td class = "content" >							
-								<ul class="faq">
-									<li class="q">
-										<span th:text = "${board.boardTitle}"></span>
-									</li>
-									<li class="a">
-										<span th:text = "'문의내용:'+${board.boardContent}"></span>
-									</li>
-								</ul>
+							<td class = "content">
+								<a th:href="@{/detailView(boardNo=${board.boardNo})}" th:text="${board.boardTitle}"></a>
 							</td>
-							<td class = "content" th:text = "${board.boardDate}"></td>
-							<td class = "content" >
-								<a href = "#">수정</a>
-							</td>	
-							<td class = "content" >
-								<a href = "#">삭제</a>
-							</td>								
+							<td class = "content" th:text = "${board.memberId}"></td>
+							<td class = "content" th:text = "${board.boardDate.substring(0, 16)}"></td>								
 						</tr>						
 					</tbody>
-				</table>			
+				</table>
+				<div style = "text-align: center;">
+					<span id="currentPage" th:text="'- ' + ${currentPage} + ' -'" ></span>
+				</div>					
 			<div class="col-sm-3">			
 			</div>
 			</div>

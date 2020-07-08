@@ -17,77 +17,50 @@
 	position:absolute;
 	top:130px;
 	left:200px;
-	width:603px;
+	width:1000px;
 	height:337px;
 	border: 1px;
 	
 }
 .out{
 	position: absolute;
-	top:89px;
-	left:730px;
-	width:70px;
-	height:25px;
-	font-size : 15px;
-	background: #BDBDBD; 
-	text-align: center;
-	color: #000000;
-	font-weight: bolder;
-	border-radius: 8px;
+	top:700px;
+	left:810px;
+	width:100px;
+	height:40px;
 	
 	
 }
 .box1{
 	position: absolute;
-	top:495px;
+	top:700px;
 	left:700px;
 	width:100px;
 	height:40px;
 }
-.box2{
-	position: absolute;
-	top:540px;
-	left:700px;
-	width:100px;
-	height:40px;
-}
-td.Infotable{
-	border: 2px solid #D5D5D5;
-	width: 300px;
-	height: 50px;
-	text-align: center;
-	background: #EAEAEA;
-	font-weight: bolder;
-}
-td.Infotable-Info{
-	border: 2px solid #D5D5D5;
-	width: 650px;
-	height: 50px;
-	text-align: center;
-	
-}
+
 img.pic{
-	width: 120px;
-	height: 60px;
+	width: 250px;
+	height: 200px;
 }
 </style>
 <body>
 	<div class="container-fleid">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 				<div th:include="/include/menu::sidemenu"></div> 
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-8">
 				<div class = "centered">
 					<h1 id = "Info">회원정보</h1>
 				</div>
 				<br>
 				<br>
 				<div>
-					<a type = "button" class=" out" th:href = "@{/removeMember(memberId=${loginMember.memberId})}"  >회원탈퇴</a>
+					<a type = "button" class="btn btn-primary out" th:href = "@{/removeMember(memberId=${loginMember.memberId})}"  >회원탈퇴</a>
 				</div>
 				<div class = "extable">
-					<table >
+					<table class="table" style = "text-align: center;">
 						<tr>
 							<td class = "Infotable">
 								<div class = "name">사용자 이미지</div>
@@ -144,7 +117,7 @@ img.pic{
 						<tr>
 							<td class = "Infotable">가입날짜</td>     		
 							<td class = "Infotable-Info">
-								<span th:text = "${member.memberDate}"></span>
+								<span th:text = "${member.memberDate.substring(0,16)}"></span>
 							</td>
 							<td>
 								<span id = "emailHelper"></span>
@@ -156,12 +129,8 @@ img.pic{
 				<div>
 					<a type = "button" class="btn btn-primary box1" th:href = "@{/modifyMemberInfo(memberId=${loginMember.memberId})}">정보수정</a>
 				</div>
-				<br>
-				<div>
-					<a type = "button" class="btn btn-primary box2" href = "/home"  >홈으로</a>
-				</div>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 			</div>
 		</div>
 	</div>
